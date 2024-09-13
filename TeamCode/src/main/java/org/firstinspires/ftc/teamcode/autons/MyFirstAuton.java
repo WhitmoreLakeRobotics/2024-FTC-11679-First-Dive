@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.autons;
 
+
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -157,12 +159,26 @@ public class MyFirstAuton extends OpMode {
             case _100_Strafe_Right:
                 if (robot.driveTrain.getCmdComplete()) {
                     robot.driveTrain.CmdDrive(4, 90, 0.35, 0);
-                    currentStage = stage._100_Strafe_Right;
+                    currentStage = stage._110_Drive_Backward;
                 }
 
                 break;
+
+            case _110_Drive_Backward:
+                if (robot.driveTrain.getCmdComplete()) {
+                    robot.driveTrain.CmdDrive(4, 180, 0.35, 0);
+                    currentStage = stage._120_End;
+                }
+                break;
+
+            case _120_End:
+                if (robot.driveTrain.getCmdComplete()) {
+                    robot.driveTrain.stop();
+
+                }
+                break;
         }
-    }  //  loop
+}  //  loop
 
     /*
      * Code to run ONCE after the driver hits STOP
