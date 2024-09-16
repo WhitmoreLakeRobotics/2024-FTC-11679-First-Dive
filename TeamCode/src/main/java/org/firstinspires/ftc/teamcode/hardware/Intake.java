@@ -25,8 +25,9 @@ public class Intake extends BaseHardware {
 
     private boolean cmdComplete = true;
     private Mode CurrentMode = Mode.STOP;
-
-
+    private final double StopPos = 0.5;
+    private final double InPos = 0;
+    private final double OutPos = 1;
 
     /**
      * Hardware Mappings
@@ -80,6 +81,15 @@ public class Intake extends BaseHardware {
      */
     public void loop(){
      switch(CurrentMode){
+         case STOP:
+
+             break;
+         case OUT:
+
+             break;
+         case IN:
+
+             break;
          //make case for each option
      }
 
@@ -87,7 +97,7 @@ public class Intake extends BaseHardware {
 
     public void doStop(){
         CurrentMode = Mode.STOP;
-
+        NTKS01.setPosition(StopPos);
         cmdComplete = true;
     }
 
@@ -103,6 +113,18 @@ public class Intake extends BaseHardware {
     void stop(){
 
 }
+
+public void doIn(){
+    CurrentMode = Mode.IN;
+NTKS01.setPosition(InPos);
+    cmdComplete = true;
+}
+    public void doOut(){
+        CurrentMode = Mode.OUT;
+NTKS01.setPosition(OutPos);
+        cmdComplete = true;
+    }
+
 
 private enum Mode{
         IN,
