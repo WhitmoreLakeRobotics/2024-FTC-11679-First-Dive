@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import android.graphics.Color;
+
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * Base class for FTC Team 8492 defined hardware
@@ -20,6 +24,7 @@ public class Intake extends BaseHardware {
     public Telemetry telemetry = null;
     //private ColorRangeSensor IntakeSensor;
     //private DistanceSensor RearLeftSensor
+private ColorRangeSensor NTKCRS1;
 
     private Servo NTKS01;   //intake servo
 
@@ -28,6 +33,13 @@ public class Intake extends BaseHardware {
     private final double StopPos = 0.5;
     private final double InPos = 0;
     private final double OutPos = 1;
+
+    private Color SignalColor;
+    private double NTKdistance; //in cm
+    private double PickupDistance = 3.0; //in cm
+    private double PickupDistanceTol = 1.25; //in cm
+
+
 
     /**
      * Hardware Mappings
@@ -52,6 +64,7 @@ public class Intake extends BaseHardware {
      */
     public void init(){
         NTKS01 = hardwareMap.get(Servo.class,"NTKS01");
+        NTKCRS1 = hardwareMap.get(ColorRangeSensor.class, "NTKCRS1");
     }
 
     /**
@@ -88,6 +101,7 @@ public class Intake extends BaseHardware {
 
              break;
          case IN:
+             NTKdistance = NTKCRS1.getDistance(DistanceUnit.CM);
 
              break;
          //make case for each option
