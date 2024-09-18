@@ -103,6 +103,10 @@ private ColorRangeSensor NTKCRS1;
          case IN:
              NTKdistance = NTKCRS1.getDistance(DistanceUnit.CM);
 
+             if ( NTKCRS1 == Blue )
+
+
+
              break;
          //make case for each option
      }
