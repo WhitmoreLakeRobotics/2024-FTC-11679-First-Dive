@@ -39,8 +39,9 @@ private ColorRangeSensor NTKCRS1;
     private double PickupDistance = 3.0; //in cm
     private double PickupDistanceTol = 1.25; //in cm
 
-
-
+    private int SensorBlue;
+    private int SensorRed;
+    private int SensorGreen;
     /**
      * Hardware Mappings
      */
@@ -101,12 +102,8 @@ private ColorRangeSensor NTKCRS1;
 
              break;
          case IN:
-             NTKdistance = NTKCRS1.getDistance(DistanceUnit.CM);
-
-             if ( NTKCRS1 == Blue )
-
-
-
+             GetSenDist();
+             
              break;
          //make case for each option
      }
@@ -132,6 +129,19 @@ private ColorRangeSensor NTKCRS1;
 
 }
 
+    private void getSenDist() {
+       NTKdistance = NTKCRS1.getDistance(DistanceUnit.CM);
+}
+    private void updateColorSensor(){
+       SensorBlue = NTKCRS1.blue();
+       SensorRed = NTKCRS1.red();
+       SensorGreen = NTKCRS1.green();
+       
+       
+    }
+
+
+
 public void doIn(){
     CurrentMode = Mode.IN;
 NTKS01.setPosition(InPos);
@@ -144,15 +154,36 @@ NTKS01.setPosition(OutPos);
     }
 
 
-private enum Mode{
-        IN,
-        OUT,
-        STOP;
+private enum Mode {
+    IN,
+    OUT,
+    STOP;
 
 
+}
+
+private enum Target {
+ REDT(200,0,0),
+ BLUET(0,200,0),
+ YELLOWT(200,0,200);
+
+    Target(int red, int blue, int green) {
+    this.red(){ return red; }
+    this.blue(){ return blue; }
+    this.green(){ return green; }
+    }
+
+    private void green() {
+    }
+
+    private void blue() {
+    }
+
+    private void red() {
     }
 
 
+}
 
 
 
