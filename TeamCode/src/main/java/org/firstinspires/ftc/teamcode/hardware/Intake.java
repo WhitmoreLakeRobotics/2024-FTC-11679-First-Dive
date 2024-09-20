@@ -47,6 +47,7 @@ private ColorRangeSensor NTKCRS1;
      */
     public HardwareMap hardwareMap = null; // will be set in Child class
 
+    public Target currentTarget = Target.UNKNOWNT;
 
     /**
      * BaseHardware constructor
@@ -102,7 +103,7 @@ private ColorRangeSensor NTKCRS1;
 
              break;
          case IN:
-             GetSenDist();
+             getSenDist();
              
              break;
          //make case for each option
@@ -140,7 +141,29 @@ private ColorRangeSensor NTKCRS1;
        
     }
 
+    public void CheckForTarget(){
+        updateColorSensor();
 
+        if ((Target.REDT.red <= SensorRed) &&
+        (Target.REDT.blue >= SensorBlue) &&
+                (Target.REDT.green >= SensorGreen)){
+            currentTarget = Target.REDT;
+        }
+        else if ((Target.BLUET.red >= SensorRed) &&
+                (Target.BLUET.blue <= SensorBlue) &&
+                (Target.BLUET.green >= SensorGreen)) {
+            currentTarget = Target.BLUET;
+        }
+        else if ((Target.YELLOWT.red <= SensorRed) &&
+                (Target.YELLOWT.blue >= SensorBlue) &&
+                (Target.YELLOWT.green <= SensorGreen)) {
+            currentTarget = Target.YELLOWT;
+        }
+        else {currentTarget = Target.UNKNOWNT;
+
+        }
+
+    }
 
 public void doIn(){
     CurrentMode = Mode.IN;
@@ -162,25 +185,22 @@ private enum Mode {
 
 }
 
-private enum Target {
+public enum Target {
  REDT(200,0,0),
  BLUET(0,200,0),
- YELLOWT(200,0,200);
+ YELLOWT(200,0,200),
+ UNKNOWNT( 0,0,0);
+
+ private int red;
+ private int blue;
+ private int green;
 
     Target(int red, int blue, int green) {
-    this.red(){ return red; }
-    this.blue(){ return blue; }
-    this.green(){ return green; }
+    this.red = red;
+    this.blue = blue;
+    this.green = green;
     }
 
-    private void green() {
-    }
-
-    private void blue() {
-    }
-
-    private void red() {
-    }
 
 
 }
