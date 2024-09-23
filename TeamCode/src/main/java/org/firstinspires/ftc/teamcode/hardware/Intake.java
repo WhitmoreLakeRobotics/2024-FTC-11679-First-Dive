@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.common.CommonLogic;
 
 /**
  * Base class for FTC Team 8492 defined hardware
@@ -103,8 +104,8 @@ private ColorRangeSensor NTKCRS1;
 
              break;
          case IN:
-             getSenDist();
-             
+
+         AutoStopIntake();
              break;
          //make case for each option
      }
@@ -116,7 +117,12 @@ private ColorRangeSensor NTKCRS1;
         NTKS01.setPosition(StopPos);
         cmdComplete = true;
     }
-
+    private void  AutoStopIntake() {
+        getSenDist();
+        if(CommonLogic.inRange(NTKdistance,PickupDistance,PickupDistanceTol)){
+            CurrentMode = Mode.STOP;
+        }
+    }
 
 
     /**
