@@ -8,6 +8,7 @@ public class Robot extends BaseHardware {
     public Lighting lighting = new Lighting();
     public Sensors sensors = new Sensors();
     public Intake intake = new Intake();
+    public Arm arm = new Arm();
 
     @Override
     public void init() {
@@ -25,8 +26,16 @@ public class Robot extends BaseHardware {
         sensors.init();
 
         intake.hardwareMap = this.hardwareMap;
-        intake.telemetry =this.telemetry;
+        intake.telemetry = this.telemetry;
         intake.init();
+
+        arm.hardwareMap = this.hardwareMap;
+        arm.telemetry = this.telemetry;
+        arm.init();
+
+
+
+
     }
 
     @Override
@@ -35,6 +44,7 @@ public class Robot extends BaseHardware {
         lighting.init_loop();
         sensors.init_loop();
         intake.init_loop();
+        arm.init_loop();
     }
 
     @Override
@@ -43,6 +53,7 @@ public class Robot extends BaseHardware {
         lighting.start();
         sensors.start();
         intake.start();
+        arm.start();
 
         lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }
@@ -53,6 +64,7 @@ public class Robot extends BaseHardware {
         lighting.loop();
         sensors.loop();
         intake.loop();
+        arm.loop();
     }
 
 
@@ -62,6 +74,7 @@ public class Robot extends BaseHardware {
         lighting.stop();
         sensors.stop();
         intake.stop();
+        arm.stop();
 
         lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -43,7 +44,15 @@ public class Arm extends BaseHardware {
     private int extPValue = 50;
     private int extTargetPos = 0;
 
+ private Servo NTKS02;
 
+
+    private final double StartPos = 0;
+    private final double CarryPos = 0.3;
+    private final double NTKPos = 0.7;
+    private final double RvsSlam = 1;
+
+    private static double extStepSize = 5.0;
 
     /**
      * Hardware Mappings
@@ -241,6 +250,13 @@ public class Arm extends BaseHardware {
      */
     void stop(){
 
+    }
+
+    public void updateExtension(double updateTarget){
+        //multiply update target by some amount then add to target pos.
+        //wrap set value in cap
+        int nTarget = (int) (extTargetPos + (updateTarget * extStepSize));
+        extTargetPos = CommonLogic.CapValueint(nTarget,CurrentMode.ExtPos,CurrentMode.ExtMax);
     }
 
     public void setCurrentMode(){
