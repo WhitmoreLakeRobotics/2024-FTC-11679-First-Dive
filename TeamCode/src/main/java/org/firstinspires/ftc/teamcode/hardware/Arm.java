@@ -80,13 +80,13 @@ public class Arm extends BaseHardware {
         AM1.setDirection(DcMotor.Direction.REVERSE);
         AM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         AM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        AM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        AM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         EM1 = hardwareMap.dcMotor.get("EM1");
         EM1.setDirection(DcMotor.Direction.REVERSE);
         EM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         EM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        EM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        EM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
     }
 
@@ -97,6 +97,10 @@ public class Arm extends BaseHardware {
      * This method is optional. By default this method takes no action.
      */
     public void init_loop() {
+
+       telemetry.addData("AM1 ",AM1.getCurrentPosition());
+       telemetry.addData("EM1 ",EM1.getCurrentPosition());
+
     }
 
     /**

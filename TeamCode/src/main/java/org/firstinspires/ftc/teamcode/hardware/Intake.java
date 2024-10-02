@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import android.bluetooth.BluetoothA2dp;
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
@@ -77,6 +78,10 @@ private ColorRangeSensor NTKCRS1;
      * This method is optional. By default this method takes no action.
      */
      public void init_loop() {
+         telemetry.addData("Blue", NTKCRS1.blue());
+         telemetry.addData("Red ",NTKCRS1.red());
+         telemetry.addData("Green ",NTKCRS1.green());
+         telemetry.addData("Distance ",NTKCRS1.getDistance(DistanceUnit.CM));
      }
 
     /**
@@ -192,10 +197,10 @@ private enum Mode {
 }
 
 public enum Target {
- REDT(200,0,0),
- BLUET(0,200,0),
- YELLOWT(200,0,200),
- UNKNOWNT( 0,0,0);
+ REDT(200,10,10),
+ BLUET(10,200,10),
+ YELLOWT(200,10,200),
+ UNKNOWNT( 10,10,10);
 
  private int red;
  private int blue;
