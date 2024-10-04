@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 
@@ -15,6 +16,7 @@ public class CommonGyro extends BaseHardware {
 
     // The IMU sensor object
     BNO055IMU imu;
+    // BHI260IMU imu;
     // State used for updating telemetry
     Orientation angles;
     int gyroHeading_Current = 0;
@@ -40,7 +42,7 @@ public class CommonGyro extends BaseHardware {
         // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
         // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
         // and named "imu".
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu = hardwareMap.get(BNO055IMU.class, "imu2");
         //imu.initialize(parameters);
 
     }

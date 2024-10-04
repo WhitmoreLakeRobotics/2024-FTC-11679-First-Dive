@@ -5,7 +5,7 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 public class Robot extends BaseHardware {
 
     public DriveTrain driveTrain = new DriveTrain();
-    public Lighting lighting = new Lighting();
+    //public Lighting lighting = new Lighting();
     public Sensors sensors = new Sensors();
     public Intake intake = new Intake();
     public Arm arm = new Arm();
@@ -17,9 +17,9 @@ public class Robot extends BaseHardware {
         driveTrain.telemetry = this.telemetry;
         driveTrain.init();
 
-           lighting.hardwareMap = this.hardwareMap;
-        lighting.telemetry = this.telemetry;
-        lighting.init();
+         //  lighting.hardwareMap = this.hardwareMap;
+        //lighting.telemetry = this.telemetry;
+       // lighting.init();
 
         sensors.hardwareMap = this.hardwareMap;
         sensors.telemetry = this.telemetry;
@@ -41,7 +41,7 @@ public class Robot extends BaseHardware {
     @Override
     public void init_loop() {
         driveTrain.init_loop();
-        lighting.init_loop();
+        //lighting.init_loop();
         sensors.init_loop();
         intake.init_loop();
         arm.init_loop();
@@ -50,18 +50,18 @@ public class Robot extends BaseHardware {
     @Override
     public void start() {
         driveTrain.start();
-        lighting.start();
+       // lighting.start();
         sensors.start();
         intake.start();
         arm.start();
 
-        lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
+       // lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }
 
     @Override
     public void loop() {
         driveTrain.loop();
-        lighting.loop();
+       //. lighting.loop();
         sensors.loop();
         intake.loop();
         arm.loop();
@@ -71,12 +71,12 @@ public class Robot extends BaseHardware {
     @Override
     public void stop() {
         driveTrain.stop();
-        lighting.stop();
+       // lighting.stop();
         sensors.stop();
         intake.stop();
         arm.stop();
 
-        lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
+       // lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }
 
 

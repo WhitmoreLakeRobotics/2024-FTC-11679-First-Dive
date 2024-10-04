@@ -38,7 +38,7 @@ private ColorRangeSensor NTKCRS1;
 
     private Color SignalColor;
     private double NTKdistance; //in cm
-    private double PickupDistance = 3.0; //in cm
+    private double PickupDistance = 4.5; //in cm
     private double PickupDistanceTol = 1.25; //in cm
 
     private int SensorBlue;
@@ -197,9 +197,9 @@ private enum Mode {
 }
 
 public enum Target {
- REDT(200,10,10),
- BLUET(10,200,10),
- YELLOWT(200,10,200),
+ REDT(90,60,60),
+ BLUET(60,90,70),
+ YELLOWT(110,60,90),
  UNKNOWNT( 10,10,10);
 
  private int red;

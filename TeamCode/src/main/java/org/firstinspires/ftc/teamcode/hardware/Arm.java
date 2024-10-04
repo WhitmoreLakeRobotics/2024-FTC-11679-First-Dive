@@ -33,14 +33,14 @@ public class Arm extends BaseHardware {
     private static final double ARMSPEED = 0.40;
     private double ARMHOLDPOWER =0.00;
     private static final int minArmPos = 0;
-    private static final int maxArmPos = 1000;
+    private static final int maxArmPos = 1690;
     private int armPValue = 50;
     private int armTargetPos = 0;
 
     private static final double EXTSPEED = 0.40;
     private double EXTHOLDPOWER =0.00;
     private static final int minExtPos = 0;
-    private static final int maxExtPos = 1000;
+    private static final int maxExtPos = 3110;
     private int extPValue = 50;
     private int extTargetPos = 0;
 
@@ -100,7 +100,7 @@ public class Arm extends BaseHardware {
 
        telemetry.addData("AM1 ",AM1.getCurrentPosition());
        telemetry.addData("EM1 ",EM1.getCurrentPosition());
-
+       telemetry.addData( " Arm Mode ", CurrentMode.toString());
     }
 
     /**
@@ -270,7 +270,7 @@ public class Arm extends BaseHardware {
     private enum Mode{
         START(0,50,0,0,50,0,5),
         PICKUP_TANK(5,50,0,0,50,0,5),
-        PICKUP_GROUND(10,50,0,0,50,0,5),
+        PICKUP_GROUND(0,50,0,490,50,0,495),
         PICKUP_WALL(15,50,0,0,50,0,5),
         DELIVER_TO_OBSERVATION(20,50,0,0,50,0,5),
         DELIVER_TO_LOW_CHAMBER(25,50,0,0,50,0,5),

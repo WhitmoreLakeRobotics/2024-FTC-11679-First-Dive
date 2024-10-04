@@ -243,7 +243,7 @@ public class Tele_Op extends OpMode {
         if (CommonLogic.oneShot(gamepad2.right_bumper, gp2_prev_right_bumper)) {
         }
         if (CommonLogic.oneShot(gamepad2.back, gp2_prev_back)){
-            robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.TWINKLES_FOREST_PALETTE);
+          //  robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.TWINKLES_FOREST_PALETTE);
         }
 
         if (CommonLogic.oneShot(gamepad2.start, gp2_prev_start)){
