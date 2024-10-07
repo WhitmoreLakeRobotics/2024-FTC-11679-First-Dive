@@ -119,8 +119,8 @@ public class DriveTrain extends BaseHardware {
             telemetry.log().add("RDM2 is null...");
         }
 
-        LDM1.setDirection(DcMotor.Direction.FORWARD);
-        LDM2.setDirection(DcMotor.Direction.FORWARD);
+        LDM1.setDirection(DcMotor.Direction.REVERSE);
+        LDM2.setDirection(DcMotor.Direction.REVERSE);
         RDM1.setDirection(DcMotor.Direction.FORWARD);
         RDM2.setDirection(DcMotor.Direction.FORWARD);
 
@@ -168,7 +168,7 @@ public class DriveTrain extends BaseHardware {
      * This method will be called repeatedly in a loop while this op mode is running
      */
     public void loop() {
-        //telemetry.addData("Gyro","Gyro "+Gyro.getGyroHeading());
+        telemetry.addData("Gyro","Gyro "+Gyro.getGyroHeading());
         //telemetry.addData("LDM1 CP","LDM1 CP "+LDM1.getCurrentPosition());
         //telemetry.addData("LDM2 CP","LDM2 CP "+LDM2.getCurrentPosition());
 
@@ -611,6 +611,9 @@ public class DriveTrain extends BaseHardware {
         Gyro.GyroInt();
     }
 
+    public int getCurrentHeading(){
+        return Gyro.gyroHeading_Current;
+    }
 
     public boolean getCmdComplete(){
 
