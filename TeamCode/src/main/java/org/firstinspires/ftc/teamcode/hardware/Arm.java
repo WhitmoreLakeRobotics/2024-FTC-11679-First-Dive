@@ -263,11 +263,12 @@ public class Arm extends BaseHardware {
         extTargetPos = CommonLogic.CapValueint(nTarget,CurrentMode.ExtPos,CurrentMode.ExtMax);
     }
 
-    public void setCurrentMode(){
+    public void setCurrentMode(Mode Nmode){
         //update to recieve and set mode
+    CurrentMode = Nmode;
     }
 
-    private enum Mode{
+    public enum Mode{
         START(0,50,0,0,50,0,5),
         PICKUP_TANK(5,50,0,0,50,0,5),
         PICKUP_GROUND(0,50,0,490,50,0,495),
