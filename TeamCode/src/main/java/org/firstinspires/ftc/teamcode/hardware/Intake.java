@@ -28,13 +28,13 @@ public class Intake extends BaseHardware {
     //private DistanceSensor RearLeftSensor
 private ColorRangeSensor NTKCRS1;
 
-    private Servo NTKS01;   //intake servo
+    public Servo NTKS01;   //intake servo
 
-    private boolean cmdComplete = true;
-    private Mode CurrentMode = Mode.STOP;
-    private final double StopPos = 0.5;
-    private final double InPos = 0;
-    private final double OutPos = 1;
+    public boolean cmdComplete = true;
+    public Mode CurrentMode = Mode.STOP;
+    public final double StopPos = 0.5;
+    public final double InPos = 0;
+    public final double OutPos = 1;
 
     private Color SignalColor;
     private double NTKdistance; //in cm
@@ -188,7 +188,7 @@ NTKS01.setPosition(OutPos);
     }
 
 
-private enum Mode {
+public enum Mode {
     IN,
     OUT,
     STOP;

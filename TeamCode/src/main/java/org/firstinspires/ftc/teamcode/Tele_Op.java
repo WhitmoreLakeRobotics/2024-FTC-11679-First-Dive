@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.teamcode.common.CommonLogic;
 import org.firstinspires.ftc.teamcode.common.Settings;
 import org.firstinspires.ftc.teamcode.hardware.Arm;
+import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 
@@ -126,7 +127,6 @@ public class Tele_Op extends OpMode {
             bAutoTurn = true;
         }
 
-
         //***********   Gamepad 1 controls ********
         if (bAutoTurn){
             if (gamepad1.right_bumper) {
@@ -182,6 +182,14 @@ public class Tele_Op extends OpMode {
             robot.driveTrain.ResetGyro();
             tHeading = 0;
         }
+
+        if (gamepad1.right_trigger > 0.8){ robot.intake.doOut();
+
+        }
+        if ((gamepad1.right_trigger <= 0.79) && (gamepad1.right_trigger > 0.10)){
+
+        }
+//            robot.sweeper.setCurrentMode(Sweeper.Mode.STOP);
 
         // Bumpers high and lower Powers for the wheels,
         /*if (CommonLogic.oneShot(gamepad1.left_bumper, gp1_prev_left_bumper)) {
@@ -317,12 +325,15 @@ public class Tele_Op extends OpMode {
   //          robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
         }
 
-        if (gamepad2.right_trigger > 0.8){
-        }
+
+
+        if (gamepad2.right_trigger > 0.8){ robot.intake.doOut();
+
+            }
         if ((gamepad2.right_trigger <= 0.79) && (gamepad2.right_trigger > 0.10)){
 //            robot.sweeper.setCurrentMode(Sweeper.Mode.STOP);
         }
-        if (gamepad2.left_trigger > 0.8) {
+        if (gamepad2.left_trigger > 0.8) {  robot.intake.doIn();
         }
         if ((gamepad2.left_trigger <= 0.79) && (gamepad2.left_trigger > 0.10)) {
           //  robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.BLUE_VIOLET);

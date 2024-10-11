@@ -29,6 +29,8 @@ public class Arm extends BaseHardware {
     private Mode CurrentMode = Mode.STOP;
     private DcMotor AM1;
     private DcMotor EM1;
+    private DcMotor AM2;
+    private DcMotor EM2;
 
     private static final double ARMSPEED = 0.40;
     private double ARMHOLDPOWER =0.00;
@@ -88,6 +90,17 @@ public class Arm extends BaseHardware {
         EM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         EM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
+        AM2 = hardwareMap.dcMotor.get("AM2");
+        AM2.setDirection(DcMotor.Direction.FORWARD);
+        AM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        AM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        AM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        EM2 = hardwareMap.dcMotor.get("EM2");
+        EM2.setDirection(DcMotor.Direction.FORWARD);
+        EM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        EM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        EM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     /**
@@ -100,6 +113,8 @@ public class Arm extends BaseHardware {
 
        telemetry.addData("AM1 ",AM1.getCurrentPosition());
        telemetry.addData("EM1 ",EM1.getCurrentPosition());
+        telemetry.addData("AM2 ",AM2.getCurrentPosition());
+        telemetry.addData("EM2 ",EM2.getCurrentPosition());
        telemetry.addData( " Arm Mode ", CurrentMode.toString());
     }
 
@@ -121,12 +136,22 @@ public class Arm extends BaseHardware {
      */
     public void loop(){
 
+
+
         AM1.setPower(CommonLogic.CapValue(
                 CommonLogic.PIDcalc(armPValue,ARMHOLDPOWER,AM1.getCurrentPosition(),armTargetPos)
                 ,-ARMSPEED,ARMSPEED));
 
         EM1.setPower(CommonLogic.CapValue(
                 CommonLogic.PIDcalc(extPValue,EXTHOLDPOWER,EM1.getCurrentPosition(),extTargetPos)
+                ,-EXTSPEED,EXTSPEED));
+
+        AM2.setPower(CommonLogic.CapValue(
+                CommonLogic.PIDcalc(armPValue,ARMHOLDPOWER,AM2.getCurrentPosition(),armTargetPos)
+                ,-ARMSPEED,ARMSPEED));
+
+        EM2.setPower(CommonLogic.CapValue(
+                CommonLogic.PIDcalc(extPValue,EXTHOLDPOWER,EM2.getCurrentPosition(),extTargetPos)
                 ,-EXTSPEED,EXTSPEED));
 
         switch(CurrentMode){
