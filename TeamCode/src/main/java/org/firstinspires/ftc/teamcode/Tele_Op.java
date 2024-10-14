@@ -262,6 +262,8 @@ public class Tele_Op extends OpMode {
         }
         if (CommonLogic.oneShot(gamepad2.back, gp2_prev_back)){
           //  robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.TWINKLES_FOREST_PALETTE);
+            robot.arm.doStop();
+            robot.intake.doStop();
         }
 
         if (CommonLogic.oneShot(gamepad2.start, gp2_prev_start)){
@@ -331,7 +333,8 @@ public class Tele_Op extends OpMode {
 
             }
         if ((gamepad2.right_trigger <= 0.79) && (gamepad2.right_trigger > 0.10)){
-//            robot.sweeper.setCurrentMode(Sweeper.Mode.STOP);
+
+              robot.intake.doStop();
         }
         if (gamepad2.left_trigger > 0.8) {  robot.intake.doIn();
         }

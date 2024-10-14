@@ -142,13 +142,13 @@ public class Arm extends BaseHardware {
                 CommonLogic.PIDcalc(armPValue,ARMHOLDPOWER,AM1.getCurrentPosition(),armTargetPos)
                 ,-ARMSPEED,ARMSPEED));
 
-        EM1.setPower(CommonLogic.CapValue(
-                CommonLogic.PIDcalc(extPValue,EXTHOLDPOWER,EM1.getCurrentPosition(),extTargetPos)
-                ,-EXTSPEED,EXTSPEED));
-
         AM2.setPower(CommonLogic.CapValue(
                 CommonLogic.PIDcalc(armPValue,ARMHOLDPOWER,AM2.getCurrentPosition(),armTargetPos)
                 ,-ARMSPEED,ARMSPEED));
+
+        EM1.setPower(CommonLogic.CapValue(
+                CommonLogic.PIDcalc(extPValue,EXTHOLDPOWER,EM1.getCurrentPosition(),extTargetPos)
+                ,-EXTSPEED,EXTSPEED));
 
         EM2.setPower(CommonLogic.CapValue(
                 CommonLogic.PIDcalc(extPValue,EXTHOLDPOWER,EM2.getCurrentPosition(),extTargetPos)
@@ -254,6 +254,16 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_HIGH_CHAMBER.ExtPos, Mode.DELIVER_TO_HIGH_CHAMBER.ExtPos,Mode.DELIVER_TO_HIGH_CHAMBER.ExtMax);
                 extPValue = Mode.DELIVER_TO_HIGH_CHAMBER.ExtP;
                 EXTHOLDPOWER = Mode.DELIVER_TO_HIGH_CHAMBER.ExtF;
+
+                break;
+            case STOP:
+                armTargetPos = AM1.getCurrentPosition();
+                armPValue = Mode.STOP.ArmP;
+                ARMHOLDPOWER = Mode.STOP.ArmF;
+
+                extTargetPos = EM1.getCurrentPosition();
+                extPValue = Mode.STOP.ExtP;
+                EXTHOLDPOWER = Mode.STOP.ExtF;
 
                 break;
             default:
