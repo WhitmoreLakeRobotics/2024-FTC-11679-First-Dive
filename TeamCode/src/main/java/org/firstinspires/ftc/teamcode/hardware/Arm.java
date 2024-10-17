@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -31,19 +32,24 @@ public class Arm extends BaseHardware {
     private DcMotor EM1;
     private DcMotor AM2;
     private DcMotor EM2;
+    private Servo NTKA1;
 
-    private static final double ARMSPEED = 0.40;
+    private double sOUT = 0.4;
+    private double sUP = 0.0;
+    private double sDOWN = 0.64;
+
+    private static final double ARMSPEED = 0.60;
     private double ARMHOLDPOWER =0.00;
     private static final int minArmPos = 0;
     private static final int maxArmPos = 1690;
-    private int armPValue = 50;
+    private double armPValue = 50;
     private int armTargetPos = 0;
 
-    private static final double EXTSPEED = 0.40;
+    private static final double EXTSPEED = 0.60;
     private double EXTHOLDPOWER =0.00;
     private static final int minExtPos = 0;
-    private static final int maxExtPos = 3110;
-    private int extPValue = 50;
+    private static final int maxExtPos = 3090;
+    private double extPValue = 50;
     private int extTargetPos = 0;
 
  private Servo NTKS02;
@@ -81,26 +87,30 @@ public class Arm extends BaseHardware {
         AM1 = hardwareMap.dcMotor.get("AM1");
         AM1.setDirection(DcMotor.Direction.REVERSE);
         AM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        AM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        AM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        AM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        AM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         EM1 = hardwareMap.dcMotor.get("EM1");
         EM1.setDirection(DcMotor.Direction.REVERSE);
         EM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        EM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        EM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        EM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        EM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         AM2 = hardwareMap.dcMotor.get("AM2");
         AM2.setDirection(DcMotor.Direction.FORWARD);
         AM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        AM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        AM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        AM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        AM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         EM2 = hardwareMap.dcMotor.get("EM2");
         EM2.setDirection(DcMotor.Direction.FORWARD);
         EM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        EM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        EM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        EM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        EM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        NTKA1 = hardwareMap.get(Servo.class,"NTKA1");
+
+
     }
 
     /**
@@ -135,7 +145,11 @@ public class Arm extends BaseHardware {
      * This method will be called repeatedly in a loop while this op mode is running
      */
     public void loop(){
-
+        telemetry.addData("AM1 ",AM1.getCurrentPosition());
+        telemetry.addData("EM1 ",EM1.getCurrentPosition());
+        telemetry.addData("AM2 ",AM2.getCurrentPosition());
+        telemetry.addData("EM2 ",EM2.getCurrentPosition());
+        telemetry.addData( " Arm Mode ", CurrentMode.toString());
 
 
         AM1.setPower(CommonLogic.CapValue(
@@ -302,29 +316,33 @@ public class Arm extends BaseHardware {
         //update to recieve and set mode
     CurrentMode = Nmode;
     }
+    public void setWristUp(){NTKA1.setPosition(sUP);}
+    public void setWristOut(){NTKA1.setPosition(sOUT);}
+    public void setWristDown(){NTKA1.setPosition(sDOWN);}
+
 
     public enum Mode{
         START(0,50,0,0,50,0,5),
-        PICKUP_TANK(5,50,0,0,50,0,5),
-        PICKUP_GROUND(0,50,0,490,50,0,495),
+        PICKUP_TANK(0,50,0,560,50,0,1716),
+        PICKUP_GROUND(0,50,0,138,50,0,160),
         PICKUP_WALL(15,50,0,0,50,0,5),
         DELIVER_TO_OBSERVATION(20,50,0,0,50,0,5),
         DELIVER_TO_LOW_CHAMBER(25,50,0,0,50,0,5),
         DELIVER_TO_HIGH_CHAMBER(30,50,0,0,50,0,5),
-        DELIVER_TO_LOW_BASKET(35,50,0,0,50,0,5),
-        DELIVER_TO_HIGH_BASKET(40,50,0,0,50,0,5),
-        CLIMB(45,50,0,0,50,0,5),
+        DELIVER_TO_LOW_BASKET(1144,50,0,3000,50,0,3020),
+        DELIVER_TO_HIGH_BASKET(1450,50,0,2530,50,0.05,2533),
+        CLIMB(854,50,0,1457,50,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5);
 
         private int ArmPos;
-        private int ArmP;
-        private int ArmF;
+        private double ArmP;
+        private double ArmF;
         private int ExtPos;
-        private int ExtP;
-        private int ExtF;
+        private double ExtP;
+        private double ExtF;
         private int ExtMax;
 
-        private Mode(int ArmPos,int ArmP, int ArmF,int ExtPos, int ExtP,int ExtF, int ExtMax){
+        private Mode(int ArmPos,double ArmP, double ArmF,int ExtPos, double ExtP,double ExtF, int ExtMax){
             this.ArmPos = ArmPos;
             this.ArmP = ArmP;
             this.ArmF = ArmF;

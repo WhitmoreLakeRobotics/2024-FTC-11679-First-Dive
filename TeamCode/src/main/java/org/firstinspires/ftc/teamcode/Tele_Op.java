@@ -252,6 +252,8 @@ public class Tele_Op extends OpMode {
         if (CommonLogic.oneShot(gamepad2.left_bumper, gp2_prev_left_bumper)) {
          //   robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.LIME);
 
+        robot.arm.setWristOut();
+        robot.intake.doStop();
             RobotLog.aa(TAGTeleop, " gp2_prev_left_bumper : " + gp2_prev_left_bumper);
         }
 
@@ -259,6 +261,8 @@ public class Tele_Op extends OpMode {
 
 
         if (CommonLogic.oneShot(gamepad2.right_bumper, gp2_prev_right_bumper)) {
+            robot.arm.setWristDown();
+            robot.intake.doIn();
         }
         if (CommonLogic.oneShot(gamepad2.back, gp2_prev_back)){
           //  robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.TWINKLES_FOREST_PALETTE);
@@ -267,6 +271,8 @@ public class Tele_Op extends OpMode {
         }
 
         if (CommonLogic.oneShot(gamepad2.start, gp2_prev_start)){
+            robot.arm.setWristUp();
+            robot.intake.doStop();
         }
         if (gamepad2.start){
 //            robot.cmdExcecuteBumpStack();   // this was SetPOS() not setting the mode
@@ -278,10 +284,13 @@ public class Tele_Op extends OpMode {
 
         if (CommonLogic.oneShot(gamepad2.a, gp2_prev_a)) {
             robot.arm.setCurrentMode(Arm.Mode.START);
+            robot.arm.setWristUp();
+            robot.intake.doStop();
         }
 
         if (CommonLogic.oneShot(gamepad2.b, gp2_prev_b)) {
             robot.arm.setCurrentMode(Arm.Mode.PICKUP_TANK);
+            robot.arm.setWristOut();
         }
 
         if (CommonLogic.oneShot(gamepad2.y, gp2_prev_y)) {
@@ -292,6 +301,8 @@ public class Tele_Op extends OpMode {
 
         if (CommonLogic.oneShot(gamepad2.x, gp2_prev_x)) {
             robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
+            robot.arm.setWristDown();
+            robot.intake.doIn();
         }
 
         //robot.swing_arm_and_lift.SwingPos(robot.swing_arm_and_lift.LASTSWINGPOSITION + (int)(gamepad2.left_stick_x) * 5);
@@ -312,6 +323,7 @@ public class Tele_Op extends OpMode {
 
         if (CommonLogic.oneShot(gamepad2.dpad_up, gp2_prev_dpad_up)) {
             robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_BASKET);
+            robot.arm.setWristDown();
         }
 
         if (CommonLogic.oneShot(gamepad2.dpad_down, gp2_prev_dpad_down)) {

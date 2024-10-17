@@ -38,8 +38,8 @@ private ColorRangeSensor NTKCRS1;
 
     private Color SignalColor;
     private double NTKdistance; //in cm
-    private double PickupDistance = 4.5; //in cm
-    private double PickupDistanceTol = 1.25; //in cm
+    private double PickupDistance = 8.00; //in cm
+    private double PickupDistanceTol = 4.25; //in cm
 
     private int SensorBlue;
     private int SensorRed;
@@ -103,6 +103,7 @@ private ColorRangeSensor NTKCRS1;
     public void loop(){
      switch(CurrentMode){
          case STOP:
+                doStop();
 
              break;
          case OUT:

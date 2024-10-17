@@ -56,7 +56,7 @@ public class DriveTrain extends BaseHardware {
     private double Drive_Start;  //in inches
     private double Drive_Target;  //in inches
     private static final double Distance_Per_Rev = 2.95*3.14159;
-    private static final double Gear_Ratio = 1 / 10.4329;
+    private static final double Gear_Ratio = 1 / 19.2;
     private  static final int Gyro_Tol  = 1; //was 3
     private static final double Ticks_Per_Inch = Settings.REV_HD_HEX_MOTOR_TICKS_PER_REV *  Gear_Ratio * Distance_Per_Rev;
     private double bearing_AA = 0;
@@ -119,9 +119,9 @@ public class DriveTrain extends BaseHardware {
             telemetry.log().add("RDM2 is null...");
         }
 
-        LDM1.setDirection(DcMotor.Direction.REVERSE);
+        LDM1.setDirection(DcMotor.Direction.FORWARD);
         LDM2.setDirection(DcMotor.Direction.REVERSE);
-        RDM1.setDirection(DcMotor.Direction.FORWARD);
+        RDM1.setDirection(DcMotor.Direction.REVERSE);
         RDM2.setDirection(DcMotor.Direction.FORWARD);
 
         LDM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -129,10 +129,10 @@ public class DriveTrain extends BaseHardware {
         RDM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RDM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        LDM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        LDM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RDM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RDM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LDM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        LDM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        RDM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        RDM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         LDM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LDM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
