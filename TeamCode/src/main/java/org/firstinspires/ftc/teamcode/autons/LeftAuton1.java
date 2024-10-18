@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.common.Settings;
+import org.firstinspires.ftc.teamcode.hardware.Arm;
+import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 @Disabled
@@ -95,12 +97,12 @@ public class AutonBase extends OpMode {
                 currentStage = stage._10_Forward0;
                 break;
             case _10_Forward0:
-                robot.driveTrain.CmdDrive(1, 0, 0.35, 0);
+                robot.driveTrain.CmdDrive(3, 0, 0.35, 0);
                 currentStage = stage._20_TurnL;
                 break;
             case _20_TurnL:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,-90,0,-90);
+                    robot.driveTrain.CmdDrive(24,-90,0,-90);
                     currentStage = stage._30_Deliver_To_High_Chamber;
 
                 }
@@ -108,19 +110,21 @@ public class AutonBase extends OpMode {
             case _30_Deliver_To_High_Chamber:
                 if (robot.driveTrain.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(0,-90,0,-90);
+                    robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_CHAMBER);
                     currentStage = stage._40_BearL1;
                     // get from other code;
                 }
                 break;
             case _40_BearL1:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(3,-90,0, -90);
+                    robot.driveTrain.CmdDrive(6,-90,0, -90);
                     currentStage = stage._50_OutPut;
                 }
                 break;
             case _50_OutPut:
                 if (robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(0,-90,0,-90);
+                    robot.intake.CurrentMode = Intake.Mode.OUT;
                     currentStage = stage._60_BearR1;
                     // get from other code;
                 }
@@ -128,7 +132,7 @@ public class AutonBase extends OpMode {
                 break;
             case _60_BearR1:
                 if (robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(0,0,0,0);
+                    robot.driveTrain.CmdDrive(2,0,0,0);
                     currentStage = stage._70_Arm_Retract;
                 }
 
@@ -136,72 +140,73 @@ public class AutonBase extends OpMode {
             case _70_Arm_Retract:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(0,0,0,0);
+                    robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_LOW_CHAMBER);
                     currentStage = stage._80_Drive_Right1;
                     // get from other code;
                 }
 
             case _80_Drive_Right1:
-                robot.driveTrain.CmdDrive(5,0,0.35,0);
+                robot.driveTrain.CmdDrive(48,0,0.35,0);
                 currentStage = stage._85_Drive_left1;
                 break;
 
             case _85_Drive_left1:
-                robot.driveTrain.CmdDrive(1,90,0.35,0);
+                robot.driveTrain.CmdDrive(12,90,0.35,0);
                 currentStage = stage._90_Reverse1;
                 break;
 
             case _90_Reverse1:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(5,-180,0.35,0);
+                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
                     currentStage = stage._100_Forward1;
 
                 }
                 break;
             case _100_Forward1:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(5,0,0.35,0);
+                    robot.driveTrain.CmdDrive(47,0,0.35,0);
                     currentStage = stage._105_Drive_left2;
                 }
 
                 break;
             case _105_Drive_left2:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(1,-90,0.35,0);
+                    robot.driveTrain.CmdDrive(8,-90,0.35,0);
                     currentStage = stage._110_Reverse2;
                 }
 
                 break;
             case _110_Reverse2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(5,-180,0.35,0);
+                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
                     currentStage = stage._120_Forward2;
                 }
 
                 break;
             case _120_Forward2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(5,0,0.35,0);
+                    robot.driveTrain.CmdDrive(47,0,0.35,0);
                     currentStage = stage._125_Drive_left3;
                 }
 
                 break;
             case _125_Drive_left3:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(1,-90,0.35,90);
+                    robot.driveTrain.CmdDrive(8,-90,0.35,90);
                     currentStage = stage._130_Reverse3;
                 }
 
                 break;
             case _130_Reverse3:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(5,-180,0.35,0);
+                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
                     currentStage = stage._140_Forward3;
                 }
 
                 break;
             case _140_Forward3:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(7,0,0.35,0);
+                    robot.driveTrain.CmdDrive(54,0,0.35,0);
                     currentStage = stage._150_HeadR1;
                 }
 
@@ -216,6 +221,7 @@ public class AutonBase extends OpMode {
             case _160_Extend_Arm:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(0,0,0,90);
+                    robot.arm.setCurrentMode(Arm.Mode.CLIMB);
                     currentStage = stage._170_Drive_Right2;
                  // get from other code;
 
@@ -224,9 +230,9 @@ public class AutonBase extends OpMode {
                 break;
             case _170_Drive_Right2:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(3,90,0.35,90);
+                    robot.driveTrain.CmdDrive(28,90,0.35,90);
                     currentStage = stage._180_End;
-
+                //28 is not actual variable;
 
                 }
 
