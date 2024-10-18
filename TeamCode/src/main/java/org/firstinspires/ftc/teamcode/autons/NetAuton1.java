@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.autons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -10,11 +9,11 @@ import org.firstinspires.ftc.teamcode.hardware.Arm;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-@Disabled
-@Autonomous(name = "Test_drive", group = "Auton")
+//@Disabled
+@Autonomous(name = "NetAuton1", group = "Auton")
 // @Autonomous(...) is the other common choice
 
-public class AutonBase extends OpMode {
+public class NetAuton1 extends OpMode {
 
     //RobotComp robot = new RobotComp();
     Robot robot = new Robot();
@@ -103,14 +102,14 @@ public class AutonBase extends OpMode {
             case _20_TurnL:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(24,-90,0,-90);
-                    currentStage = stage._30_Deliver_To_High_Chamber;
+                    currentStage = stage._30_Deliver_To_High_Basket;
 
                 }
                 break;
-            case _30_Deliver_To_High_Chamber:
+            case _30_Deliver_To_High_Basket:
                 if (robot.driveTrain.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(0,-90,0,-90);
-                    robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_CHAMBER);
+                    robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_BASKET);
                     currentStage = stage._40_BearL1;
                     // get from other code;
                 }
@@ -264,7 +263,7 @@ public class AutonBase extends OpMode {
         _00_preStart,
         _10_Forward0,
         _20_TurnL,
-        _30_Deliver_To_High_Chamber,
+        _30_Deliver_To_High_Basket,
         _40_BearL1,
         _50_OutPut,
         _60_BearR1,

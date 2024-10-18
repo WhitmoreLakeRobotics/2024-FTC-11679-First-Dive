@@ -35,8 +35,8 @@ public class Arm extends BaseHardware {
     private Servo NTKA1;
 
     private double sOUT = 0.4;
-    private double sUP = 0.0;
-    private double sDOWN = 0.64;
+    private double sUP = 0.25;
+    private double sDOWN = 0.73;
 
     private static final double ARMSPEED = 0.60;
     private double ARMHOLDPOWER =0.00;
@@ -136,8 +136,7 @@ public class Arm extends BaseHardware {
      * Example usage: Starting another thread.
      */
     public void start(){
-
-    }
+        setWristOut();   }
 
     /**
      * User defined loop method
@@ -250,6 +249,16 @@ public class Arm extends BaseHardware {
                 EXTHOLDPOWER = Mode.DELIVER_TO_LOW_CHAMBER.ExtF;
 
                 break;
+            case INTERMEDIATE:
+                armTargetPos = CommonLogic.CapValueint(Mode.INTERMEDIATE.ArmPos, minArmPos,maxArmPos);
+                armPValue = Mode.INTERMEDIATE.ArmP;
+                ARMHOLDPOWER = Mode.INTERMEDIATE.ArmF;
+
+                extTargetPos = CommonLogic.CapValueint(Mode.INTERMEDIATE.ExtPos, Mode.INTERMEDIATE.ExtPos,Mode.INTERMEDIATE.ExtMax);
+                extPValue = Mode.INTERMEDIATE.ExtP;
+                EXTHOLDPOWER = Mode.INTERMEDIATE.ExtF;
+
+                break;
             case DELIVER_TO_OBSERVATION:
                 armTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_OBSERVATION.ArmPos, minArmPos,maxArmPos);
                 armPValue = Mode.DELIVER_TO_OBSERVATION.ArmP;
@@ -322,17 +331,18 @@ public class Arm extends BaseHardware {
 
 
     public enum Mode{
-        START(0,50,0,0,50,0,5),
-        PICKUP_TANK(0,50,0,560,50,0,1716),
-        PICKUP_GROUND(0,50,0,138,50,0,160),
-        PICKUP_WALL(15,50,0,0,50,0,5),
-        DELIVER_TO_OBSERVATION(20,50,0,0,50,0,5),
-        DELIVER_TO_LOW_CHAMBER(25,50,0,0,50,0,5),
-        DELIVER_TO_HIGH_CHAMBER(30,50,0,0,50,0,5),
-        DELIVER_TO_LOW_BASKET(1144,50,0,3000,50,0,3020),
-        DELIVER_TO_HIGH_BASKET(1450,50,0,2530,50,0.05,2533),
-        CLIMB(854,50,0,1457,50,0,1460),
-        STOP(0,1000000000,0,0,10000000,0,5);
+        START(0,100,0,0,100,0,5),
+        PICKUP_TANK(0,100,0,560,100,0,1716),
+        PICKUP_GROUND(0,100,0,138,100,0,160),
+        PICKUP_WALL(15,100,0,0,100,0,5),
+        DELIVER_TO_OBSERVATION(20,100,0,0,100,0,5),
+        DELIVER_TO_LOW_CHAMBER(25,100,0,0,100,0,5),
+        DELIVER_TO_HIGH_CHAMBER(30,100,0,0,100,0,5),
+        DELIVER_TO_LOW_BASKET(1144,100,0,3000,100,0,3020),
+        DELIVER_TO_HIGH_BASKET(1450,100,0,2580,100,0.05,2583),
+        CLIMB(854,100,0,1457,100,0,1460),
+        STOP(0,1000000000,0,0,10000000,0,5),
+        INTERMEDIATE(1200, 100, 0, 1500, 100, 0, 1600);
 
         private int ArmPos;
         private double ArmP;

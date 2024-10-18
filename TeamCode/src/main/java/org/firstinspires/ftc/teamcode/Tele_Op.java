@@ -273,6 +273,8 @@ public class Tele_Op extends OpMode {
         if (CommonLogic.oneShot(gamepad2.start, gp2_prev_start)){
             robot.arm.setWristUp();
             robot.intake.doStop();
+            robot.arm.setCurrentMode(Arm.Mode.CLIMB);
+
         }
         if (gamepad2.start){
 //            robot.cmdExcecuteBumpStack();   // this was SetPOS() not setting the mode
@@ -294,7 +296,7 @@ public class Tele_Op extends OpMode {
         }
 
         if (CommonLogic.oneShot(gamepad2.y, gp2_prev_y)) {
-            robot.arm.setCurrentMode(Arm.Mode.PICKUP_WALL);
+            robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
 //            robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
             //robot.subExtender.incPositionIndex();
         }
