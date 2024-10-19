@@ -279,6 +279,16 @@ public class Arm extends BaseHardware {
                 EXTHOLDPOWER = Mode.DELIVER_TO_HIGH_CHAMBER.ExtF;
 
                 break;
+            case TANK_ENTRY:
+                armTargetPos = CommonLogic.CapValueint(Mode.TANK_ENTRY.ArmPos, minArmPos,maxArmPos);
+                armPValue = Mode.TANK_ENTRY.ArmP;
+                ARMHOLDPOWER = Mode.TANK_ENTRY.ArmF;
+
+                extTargetPos = CommonLogic.CapValueint(Mode.TANK_ENTRY.ExtPos, Mode.TANK_ENTRY.ExtPos,Mode.TANK_ENTRY.ExtMax);
+                extPValue = Mode.TANK_ENTRY.ExtP;
+                EXTHOLDPOWER = Mode.TANK_ENTRY.ExtF;
+
+                break;
             case STOP:
                 armTargetPos = AM1.getCurrentPosition();
                 armPValue = Mode.STOP.ArmP;
@@ -342,7 +352,8 @@ public class Arm extends BaseHardware {
         DELIVER_TO_HIGH_BASKET(1450,100,0,2620,80,0.05,2583),
         CLIMB(1000,100,0,1457,100,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5),
-        INTERMEDIATE(1500, 100, 0, 500, 100, 0, 1600);
+        INTERMEDIATE(1500, 100, 0, 500, 100, 0, 1600),
+        TANK_ENTRY(400,100,0,560,100,0,1716);
 
         private int ArmPos;
         private double ArmP;

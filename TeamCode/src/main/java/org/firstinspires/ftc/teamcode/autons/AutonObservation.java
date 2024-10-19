@@ -101,7 +101,7 @@ public class AutonObservation extends OpMode {
                 break;
 
             case _60_Left_1_2:
-                robot.driveTrain.CmdDrive(24,90,0.35,0);
+                robot.driveTrain.CmdDrive(28,90,0.35,0);
                 currentStage = stage._80_Drive_Right1;
                 break;
 
