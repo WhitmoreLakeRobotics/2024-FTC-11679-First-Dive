@@ -102,9 +102,9 @@ public class NetAuton1 extends OpMode {
             case _20_TurnL:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(0,0,0,-90);
-                    currentStage = stage._25_F24;
+                    currentStage = stage._25_Forward0_5;
 
-                    
+
 
                 }
                 break;
@@ -265,7 +265,7 @@ public class NetAuton1 extends OpMode {
         _00_preStart,
         _10_Forward0,
         _20_TurnL,
-        _25_F24,
+        _25_Forward0_5,
         _30_Deliver_To_High_Basket,
         _40_BearL1,
         _50_OutPut,
