@@ -1,15 +1,15 @@
 package org.firstinspires.ftc.teamcode.autons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.common.Settings;
+import org.firstinspires.ftc.teamcode.hardware.Arm;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
-@Disabled
-@Autonomous(name = "Test_drive", group = "Auton")
+//@Disabled
+@Autonomous(name = "AutonObservation", group = "Auton")
 // @Autonomous(...) is the other common choice
 
 public class AutonObservation extends OpMode {
@@ -24,8 +24,8 @@ public class AutonObservation extends OpMode {
     // declare auton power variables
     //private double AUTO_DRIVE_TURBO_SPEED = DriveTrain.DRIVETRAIN_TURBOSPEED;
     //private double AUTO_DRIVE_SLOW_SPEED = DriveTrain.DRIVETRAIN_SLOWSPEED;
-   // private double AUTO_DRIVE_NORMAL_SPEED = DriveTrain.DRIVETRAIN_NORMALSPEED;
-   // private double AUTO_TURN_SPEED = DriveTrain.DRIVETRAIN_TURNSPEED;
+    // private double AUTO_DRIVE_NORMAL_SPEED = DriveTrain.DRIVETRAIN_NORMALSPEED;
+    // private double AUTO_TURN_SPEED = DriveTrain.DRIVETRAIN_TURNSPEED;
 
     private String RTAG = "8492-Auton";
 
@@ -83,72 +83,101 @@ public class AutonObservation extends OpMode {
      */
     @Override
     public void loop() {
-/*
+
         telemetry.addData("Auton_Current_Stage ", currentStage);
         robot.loop();
 
-        switch (currentStage){
-            case  _unknown:
+        switch (currentStage) {
+            case _unknown:
                 currentStage = stage._00_preStart;
                 break;
             case _00_preStart:
-                currentStage = stage._10_Drive_Out;
+                currentStage = stage._40_Left_1;
                 break;
-            case _10_Drive_Out:
-                robot.driveTrain.CmdDrive(8,0,0.35,0);
-                currentStage = stage._100_End;
+
+            case _40_Left_1:
+                robot.driveTrain.CmdDrive(4,0,0.35,0);
+                currentStage = stage._60_Left_1_2;
                 break;
-            case _20_Turn_To_Backdrop:
+
+            case _60_Left_1_2:
+                robot.driveTrain.CmdDrive(24,90,0.35,0);
+                currentStage = stage._80_Drive_Right1;
+                break;
+
+            case _80_Drive_Right1:
+                robot.driveTrain.CmdDrive(51,0,0.35,0);
+                currentStage = stage._85_Drive_left1;
+                break;
+
+            case _85_Drive_left1:
+                robot.driveTrain.CmdDrive(12,-90,0.35,0);
+                currentStage = stage._90_Reverse1;
+                break;
+
+            case _90_Reverse1:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,0,0.0,0);
-                    currentStage = stage._30_Strafe_Left;
+                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
+                    currentStage = stage._100_Forward1;
 
                 }
                 break;
-            case _30_Strafe_Left:
+            case _100_Forward1:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(12,-90,0.35,0);
-                    currentStage = stage._40_Strafe_Right;
+                    robot.driveTrain.CmdDrive(47,0,0.35,0);
+                    currentStage = stage._105_Drive_left2;
                 }
+
                 break;
-            case _40_Strafe_Right:
+            case _105_Drive_left2:
+                if (robot.driveTrain.getCmdComplete())     {
+                    robot.driveTrain.CmdDrive(8,90,0.35,0);
+                    currentStage = stage._110_Reverse2;
+                }
+
+                break;
+            case _110_Reverse2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(12,90,0.35,90);
-                    currentStage = stage._50_Turn_Away_From_Backdrop;
+                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
+                    currentStage = stage._120_Forward2;
                 }
+
                 break;
-            case _50_Turn_Away_From_Backdrop:
+            case _120_Forward2:
+                if (robot.driveTrain.getCmdComplete())  {
+                    robot.driveTrain.CmdDrive(47,0,0.35,0);
+                    currentStage = stage._125_Drive_left3;
+                }
+
+                break;
+            case _125_Drive_left3:
+                if (robot.driveTrain.getCmdComplete())  {
+                    robot.driveTrain.CmdDrive(8,90,0.35,-90);
+                    currentStage = stage._130_Reverse3;
+                }
+
+                break;
+            case _130_Reverse3:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,0,0.0,0);
-                    currentStage = stage._60_Drive_To_Wall;
+                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
+                    currentStage = stage._180_End;
                 }
 
-                break;
-            case _60_Drive_To_Wall:
-                if (robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(10,-180,0.35,0);
-                    currentStage = stage._100_End;
-                }
+
 
                 break;
-            case _100_End:
+            case _180_End:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.stop();
 
 
                 }
 
-
-
-
-
-
-
                 break;
         }
 
 
-*/
+
     }  //  loop
 
     /*
@@ -162,16 +191,19 @@ public class AutonObservation extends OpMode {
     private enum stage {
         _unknown,
         _00_preStart,
-        _10_Drive_Forward,
-        _20_Strafe_Right,
-        _30_Drive_Backward,
-        _40_Drive_Forward,
-        _50_Strafe_Right,
-        _60_Drive_Backward,
-        _70_Drive_Forward,
-        _80_Strafe_Right,
-        _100_End
-
+        _40_Left_1,
+        _60_Left_1_2,
+        _80_Drive_Right1,
+        _85_Drive_left1,
+        _90_Reverse1,
+        _100_Forward1,
+        _105_Drive_left2,
+        _110_Reverse2,
+        _120_Forward2,
+        _125_Drive_left3,
+        _130_Reverse3,
+        _180_End
+        //contactbar;
 
     }
 }

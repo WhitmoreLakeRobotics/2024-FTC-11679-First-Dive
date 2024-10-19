@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.common.Settings;
 import org.firstinspires.ftc.teamcode.hardware.Arm;
-import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 //@Disabled
@@ -97,7 +96,12 @@ public class NetAuton2 extends OpMode {
                 break;
 
             case _40_Left_1:
-                robot.driveTrain.CmdDrive(4,-90,0.35,0);
+                robot.driveTrain.CmdDrive(4,0,0.35,0);
+                currentStage = stage._60_Left_1_2;
+                break;
+
+            case _60_Left_1_2:
+                robot.driveTrain.CmdDrive(24,-90,0.35,0);
                 currentStage = stage._80_Drive_Right1;
                 break;
 
@@ -219,6 +223,7 @@ public class NetAuton2 extends OpMode {
         _unknown,
         _00_preStart,
         _40_Left_1,
+        _60_Left_1_2,
         _80_Drive_Right1,
         _85_Drive_left1,
         _90_Reverse1,

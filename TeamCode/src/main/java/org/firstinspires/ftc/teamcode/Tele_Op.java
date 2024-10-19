@@ -332,12 +332,12 @@ public class Tele_Op extends OpMode {
             robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_LOW_BASKET);
         }
         if (CommonLogic.oneShot(gamepad2.dpad_right, gp2_prev_dpad_right)) {
-            robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_LOW_CHAMBER);
+            //robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_LOW_CHAMBER);
         //    robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
         }
 
         if (CommonLogic.oneShot(gamepad2.dpad_left, gp2_prev_dpad_left)) {
-            robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_CHAMBER);
+           // robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_CHAMBER);
   //          robot.lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.ORANGE);
         }
 

@@ -38,14 +38,14 @@ public class Arm extends BaseHardware {
     private double sUP = 0.25;
     private double sDOWN = 0.73;
 
-    private static final double ARMSPEED = 0.60;
+    private static final double ARMSPEED = 0.75;
     private double ARMHOLDPOWER =0.00;
     private static final int minArmPos = 0;
     private static final int maxArmPos = 1690;
     private double armPValue = 50;
     private int armTargetPos = 0;
 
-    private static final double EXTSPEED = 0.60;
+    private static final double EXTSPEED = 0.75;
     private double EXTHOLDPOWER =0.00;
     private static final int minExtPos = 0;
     private static final int maxExtPos = 3090;
@@ -339,8 +339,8 @@ public class Arm extends BaseHardware {
         DELIVER_TO_LOW_CHAMBER(25,100,0,0,100,0,5),
         DELIVER_TO_HIGH_CHAMBER(30,100,0,0,100,0,5),
         DELIVER_TO_LOW_BASKET(1144,100,0,3000,100,0,3020),
-        DELIVER_TO_HIGH_BASKET(1450,100,0,2580,100,0.05,2583),
-        CLIMB(854,100,0,1457,100,0,1460),
+        DELIVER_TO_HIGH_BASKET(1450,100,0,2620,80,0.05,2583),
+        CLIMB(1000,100,0,1457,100,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5),
         INTERMEDIATE(1500, 100, 0, 500, 100, 0, 1600);
 
