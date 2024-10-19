@@ -48,9 +48,9 @@ public class DriveTrain extends BaseHardware {
 
     private static final String TAGChassis = "8492 ";
 
-    public static final double DTrain_NORMALSPEED = 0.5;
-    public static final double DTrain_SLOWSPEED = 0.2;
-    public static final double DTrain_FASTSPEED = 0.7;
+    public static final double DTrain_NORMALSPEED = 0.65;
+    public static final double DTrain_SLOWSPEED = 0.30;
+    public static final double DTrain_FASTSPEED = 0.85;
     private double SensorDrive = 0.35;
 
     private double Drive_Start;  //in inches
