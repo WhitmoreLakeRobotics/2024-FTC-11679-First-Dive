@@ -83,7 +83,7 @@ public class AutonObservation extends OpMode {
      */
     @Override
     public void loop() {
-
+/*
         telemetry.addData("Auton_Current_Stage ", currentStage);
         robot.loop();
 
@@ -148,7 +148,7 @@ public class AutonObservation extends OpMode {
         }
 
 
-
+*/
     }  //  loop
 
     /*

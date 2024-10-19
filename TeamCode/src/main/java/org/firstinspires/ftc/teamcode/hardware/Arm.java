@@ -342,7 +342,7 @@ public class Arm extends BaseHardware {
         DELIVER_TO_HIGH_BASKET(1450,100,0,2580,100,0.05,2583),
         CLIMB(854,100,0,1457,100,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5),
-        INTERMEDIATE(1200, 100, 0, 1500, 100, 0, 1600);
+        INTERMEDIATE(1500, 100, 0, 500, 100, 0, 1600);
 
         private int ArmPos;
         private double ArmP;
