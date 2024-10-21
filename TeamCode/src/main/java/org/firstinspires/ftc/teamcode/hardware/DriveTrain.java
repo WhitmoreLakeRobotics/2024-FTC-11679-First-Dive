@@ -169,11 +169,11 @@ public class DriveTrain extends BaseHardware {
      */
     public void loop() {
         telemetry.addData("Gyro","Gyro "+Gyro.getGyroHeading());
-        //telemetry.addData("LDM1 CP","LDM1 CP "+LDM1.getCurrentPosition());
-        //telemetry.addData("LDM2 CP","LDM2 CP "+LDM2.getCurrentPosition());
+        telemetry.addData("LDM1 CP","LDM1 CP "+LDM1.getCurrentPosition());
+        telemetry.addData("LDM2 CP","LDM2 CP "+LDM2.getCurrentPosition());
 
-        //telemetry.addData("RDM1 CP","RDM1 CP "+RDM1.getCurrentPosition());
-        //telemetry.addData("RDM2 CP","RDM2 CP "+RDM2.getCurrentPosition());
+        telemetry.addData("RDM1 CP","RDM1 CP "+RDM1.getCurrentPosition());
+        telemetry.addData("RDM2 CP","RDM2 CP "+RDM2.getCurrentPosition());
 
         switch(Current_Mode){
             case TELEOP:
