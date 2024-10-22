@@ -101,8 +101,9 @@ public class NetAuton1 extends OpMode {
                 break;
             case _20_TurnL:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,0,0,-90);
-                    currentStage = stage._25_Forward0_5;
+                    robot.driveTrain.CmdDrive(0,0,0.35,-90);
+                    robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
+                    currentStage = stage._30_Deliver_To_High_Basket;
 
 
 
@@ -110,7 +111,7 @@ public class NetAuton1 extends OpMode {
                 break;
             case _30_Deliver_To_High_Basket:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(0,-90,0,-90);
+                   // robot.driveTrain.CmdDrive(0,-90,0,-90);
                     robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_BASKET);
                     currentStage = stage._40_BearL1;
                     // get from other code;
@@ -124,104 +125,104 @@ public class NetAuton1 extends OpMode {
                 break;
             case _50_OutPut:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,-90,0,-90);
+                    //robot.driveTrain.CmdDrive(0,-90,0,-90);
                     robot.intake.CurrentMode = Intake.Mode.OUT;
                     currentStage = stage._60_BearR1;
-                    // get from other code;
+                    // put timer above;
                 }
 
                 break;
             case _60_BearR1:
                 if (robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(2,0,0,0);
+                    robot.driveTrain.CmdDrive(2,0,0,-90);
                     currentStage = stage._70_Arm_Retract;
                 }
 
                 break;
             case _70_Arm_Retract:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,0,0,0);
+                    //robot.driveTrain.CmdDrive(0,0,0,-90);
                     robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
                     currentStage = stage._80_Drive_Right1;
                     // get from other code;
                 }
 
             case _80_Drive_Right1:
-                robot.driveTrain.CmdDrive(48,0,0.35,0);
+                robot.driveTrain.CmdDrive(48,0,0.35,-90);
                 currentStage = stage._85_Drive_left1;
                 break;
 
             case _85_Drive_left1:
-                robot.driveTrain.CmdDrive(12,90,0.35,0);
+                robot.driveTrain.CmdDrive(12,90,0.35,-90);
                 currentStage = stage._90_Reverse1;
                 break;
 
             case _90_Reverse1:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
+                    robot.driveTrain.CmdDrive(47,-180,0.35,-90);
                     currentStage = stage._100_Forward1;
 
                 }
                 break;
             case _100_Forward1:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(47,0,0.35,0);
+                    robot.driveTrain.CmdDrive(47,0,0.35,-90);
                     currentStage = stage._105_Drive_left2;
                 }
 
                 break;
             case _105_Drive_left2:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(8,-90,0.35,0);
+                    robot.driveTrain.CmdDrive(8,-90,0.35,-90);
                     currentStage = stage._110_Reverse2;
                 }
 
                 break;
             case _110_Reverse2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
+                    robot.driveTrain.CmdDrive(47,-180,0.35,-90);
                     currentStage = stage._120_Forward2;
                 }
 
                 break;
             case _120_Forward2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(47,0,0.35,0);
+                    robot.driveTrain.CmdDrive(47,0,0.35,-90);
                     currentStage = stage._125_Drive_left3;
                 }
 
                 break;
             case _125_Drive_left3:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(8,-90,0.35,90);
+                    robot.driveTrain.CmdDrive(8,-90,0.35,-90);
                     currentStage = stage._130_Reverse3;
                 }
 
                 break;
             case _130_Reverse3:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(47,-180,0.35,0);
+                    robot.driveTrain.CmdDrive(47,-180,0.35,-90);
                     currentStage = stage._140_Forward3;
                 }
 
                 break;
             case _140_Forward3:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(54,0,0.35,0);
+                    robot.driveTrain.CmdDrive(54,0,0.35,-90);
                     currentStage = stage._150_HeadR1;
                 }
 
                 break;
             case _150_HeadR1:
                 if (robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(0,0,0,90);
+                    robot.driveTrain.CmdDrive(0,0,0.35,90);
                     currentStage = stage._160_Extend_Arm;
                 }
 
                 break;
             case _160_Extend_Arm:
                 if(robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,0,0,90);
+                    //robot.driveTrain.CmdDrive(0,0,0,90);
                     robot.arm.setCurrentMode(Arm.Mode.CLIMB);
                     currentStage = stage._170_Drive_Right2;
                  // get from other code;

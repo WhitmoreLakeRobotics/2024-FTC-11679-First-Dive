@@ -97,8 +97,8 @@ public class MyFirstAuton extends OpMode {
                 currentStage = stage._10_Drive_Out;
                 break;
             case _10_Drive_Out:
-                robot.driveTrain.CmdDrive(4, 0, 0.35, 0);
-                currentStage = stage._20_Strafe_Right;
+                robot.driveTrain.CmdDrive(10, 0, 0.30, 0);
+                currentStage = stage._120_End;
                 break;
             case _20_Strafe_Right:
                 if (robot.driveTrain.getCmdComplete()) {

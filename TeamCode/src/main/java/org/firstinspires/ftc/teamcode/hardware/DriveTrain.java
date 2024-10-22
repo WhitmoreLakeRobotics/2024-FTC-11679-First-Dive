@@ -56,14 +56,14 @@ public class DriveTrain extends BaseHardware {
     private double Drive_Start;  //in inches
     private double Drive_Target;  //in inches
     private static final double Distance_Per_Rev = 4.09*3.14159;
-    private static final double Gear_Ratio = 1 / 19.2;
+    private static final double Gear_Ratio = 19.2;
     private  static final int Gyro_Tol  = 1; //was 3
-    private static final double Ticks_Per_Inch = Settings.REV_HD_HEX_MOTOR_TICKS_PER_REV *  Gear_Ratio * Distance_Per_Rev;
+    private static final double Ticks_Per_Inch = (Settings.REV_HD_HEX_MOTOR_TICKS_PER_REV *  Gear_Ratio) / Distance_Per_Rev;
     private double bearing_AA = 0;
     private double speed_AA = 0;
     private int Target_Heading;
     private static final double driveTolAA = 0.25; //in inches
-    private static final double diaTurnRaid = 19; //in inches //was 23
+    private static final double diaTurnRaid = 12; //in inches //was 18.25
     private static final double turnDistPerDeg = ((3.14159 * diaTurnRaid)/360) * Ticks_Per_Inch; //inches per deg
     private static final double stagPos = 40;
     private static final double stagPow = 0.18;
@@ -119,9 +119,9 @@ public class DriveTrain extends BaseHardware {
             telemetry.log().add("RDM2 is null...");
         }
 
-        LDM1.setDirection(DcMotor.Direction.FORWARD);
+        LDM1.setDirection(DcMotor.Direction.REVERSE);
         LDM2.setDirection(DcMotor.Direction.REVERSE);
-        RDM1.setDirection(DcMotor.Direction.REVERSE);
+        RDM1.setDirection(DcMotor.Direction.FORWARD);
         RDM2.setDirection(DcMotor.Direction.FORWARD);
 
         LDM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -129,10 +129,10 @@ public class DriveTrain extends BaseHardware {
         RDM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RDM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        LDM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        LDM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        RDM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        RDM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        LDM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LDM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RDM1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RDM2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         LDM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LDM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -209,6 +209,7 @@ public class DriveTrain extends BaseHardware {
    public void stop(){
         Current_Mode = Mode.STOPPED;
         cmdComplete = true;
+       telemetry.addData(TAGChassis,"distance driven " + getPosInches());
         stopMotors();
 }
 
@@ -382,9 +383,9 @@ public class DriveTrain extends BaseHardware {
         //drive target needs to account turn distance
 
         Target_Heading = Heading;
-
-    Drive_Target = (TargetDist) + ((Math.abs(Gyro.getGyroHeading() - Target_Heading)*Math.sqrt(2))/turnDistPerDeg);
-
+        //disabled turn distance calc
+   // Drive_Target = (TargetDist) + ((Math.abs(Gyro.getGyroHeading() - Target_Heading)*Math.sqrt(2))/turnDistPerDeg);
+        Drive_Target = TargetDist * Ticks_Per_Inch;
     // reset encoders
      resetEncoders();
         // store Bearing
@@ -487,9 +488,8 @@ public class DriveTrain extends BaseHardware {
 
     }
     private void doDrive(){
-        double distance = getPosInches();
-        telemetry.addData(TAGChassis,"distance driven " + distance);
-        startDrive();
+        double distance = getPosInTicks();
+
     //check to see if we have driven the target distance
     if(Drive_Target <= distance) {
         //if we have reached our target distance
@@ -500,6 +500,11 @@ public class DriveTrain extends BaseHardware {
         //set current mode stop
         Current_Mode = Mode.STOPPED;
     }
+    else {
+        telemetry.addData(TAGChassis,"distance driven " + getPosInches());
+        startDrive();
+    }
+
 
         //if not keep driving
 
@@ -591,10 +596,17 @@ public class DriveTrain extends BaseHardware {
 
         return values;
 
-
-
-
     }
+    private double getPosInTicks(){
+        double values = Math.abs(LDM1.getCurrentPosition());
+        values += Math.abs(LDM2.getCurrentPosition());
+        values += Math.abs(RDM1.getCurrentPosition());
+        values += Math.abs(RDM2.getCurrentPosition());
+        values = values/4;
+
+        return values;
+    }
+
     public void QuickAligenment() {
    //The intention of this method is to return a turn value based upon a desired alingment direction
         //this should override the right joystick
