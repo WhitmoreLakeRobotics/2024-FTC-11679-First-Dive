@@ -35,8 +35,8 @@ public class Arm extends BaseHardware {
     private Servo NTKA1;
 
     private double sOUT = 0.4;
-    private double sUP = 0.25;
-    private double sDOWN = 0.73;
+    private double sUP = 0.0;
+    private double sDOWN = 1.0;
 
     private static final double ARMSPEED = 0.75;
     private double ARMHOLDPOWER =0.00;
@@ -51,6 +51,7 @@ public class Arm extends BaseHardware {
     private static final int maxExtPos = 3090;
     private double extPValue = 50;
     private int extTargetPos = 0;
+    private int extMaxPos;
 
  private Servo NTKS02;
 
@@ -60,7 +61,7 @@ public class Arm extends BaseHardware {
     private final double NTKPos = 0.7;
     private final double RvsSlam = 1;
 
-    private static double extStepSize = 5.0;
+    private static double extStepSize = 50.0;
 
     /**
      * Hardware Mappings
@@ -168,6 +169,9 @@ public class Arm extends BaseHardware {
                 ,-EXTSPEED,EXTSPEED));
 
         switch(CurrentMode){
+            case IDLE:
+
+                break;
             case START:
                 armTargetPos = CommonLogic.CapValueint(Mode.START.ArmPos, minArmPos,maxArmPos);
                 armPValue = Mode.START.ArmP;
@@ -176,6 +180,8 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.START.ExtPos, Mode.START.ExtPos,Mode.START.ExtMax);
                 extPValue = Mode.START.ExtP;
                 EXTHOLDPOWER = Mode.START.ExtF;
+                extMaxPos = Mode.START.ExtMax;
+                CurrentMode = Mode.IDLE;
 
                 break;
             case CLIMB:
@@ -186,6 +192,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.CLIMB.ExtPos, Mode.CLIMB.ExtPos,Mode.CLIMB.ExtMax);
                 extPValue = Mode.CLIMB.ExtP;
                 EXTHOLDPOWER = Mode.CLIMB.ExtF;
+                extMaxPos = Mode.CLIMB.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case PICKUP_TANK:
@@ -193,9 +202,12 @@ public class Arm extends BaseHardware {
                 armPValue = Mode.PICKUP_TANK.ArmP;
                 ARMHOLDPOWER = Mode.PICKUP_TANK.ArmF;
 
-                extTargetPos = CommonLogic.CapValueint(Mode.PICKUP_TANK.ExtPos, Mode.PICKUP_TANK.ExtPos,Mode.PICKUP_TANK.ExtMax);
+                //extTargetPos = CommonLogic.CapValueint(Mode.PICKUP_TANK.ExtPos, Mode.PICKUP_TANK.ExtPos,Mode.PICKUP_TANK.ExtMax);
                 extPValue = Mode.PICKUP_TANK.ExtP;
                 EXTHOLDPOWER = Mode.PICKUP_TANK.ExtF;
+                extMaxPos = Mode.PICKUP_TANK.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
 
                 break;
@@ -207,6 +219,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.PICKUP_WALL.ExtPos, Mode.PICKUP_WALL.ExtPos,Mode.PICKUP_WALL.ExtMax);
                 extPValue = Mode.PICKUP_WALL.ExtP;
                 EXTHOLDPOWER = Mode.PICKUP_WALL.ExtF;
+                extMaxPos = Mode.PICKUP_WALL.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case PICKUP_GROUND:
@@ -217,6 +232,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.PICKUP_GROUND.ExtPos, Mode.PICKUP_GROUND.ExtPos,Mode.PICKUP_GROUND.ExtMax);
                 extPValue = Mode.PICKUP_GROUND.ExtP;
                 EXTHOLDPOWER = Mode.PICKUP_GROUND.ExtF;
+                extMaxPos = Mode.PICKUP_GROUND.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case DELIVER_TO_LOW_BASKET:
@@ -227,6 +245,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_LOW_BASKET.ExtPos, Mode.DELIVER_TO_LOW_BASKET.ExtPos,Mode.DELIVER_TO_LOW_BASKET.ExtMax);
                 extPValue = Mode.DELIVER_TO_LOW_BASKET.ExtP;
                 EXTHOLDPOWER = Mode.DELIVER_TO_LOW_BASKET.ExtF;
+                extMaxPos = Mode.DELIVER_TO_LOW_BASKET.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case DELIVER_TO_HIGH_BASKET:
@@ -237,6 +258,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_HIGH_BASKET.ExtPos, Mode.DELIVER_TO_HIGH_BASKET.ExtPos,Mode.DELIVER_TO_HIGH_BASKET.ExtMax);
                 extPValue = Mode.DELIVER_TO_HIGH_BASKET.ExtP;
                 EXTHOLDPOWER = Mode.DELIVER_TO_HIGH_BASKET.ExtF;
+                extMaxPos = Mode.DELIVER_TO_HIGH_BASKET.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case DELIVER_TO_LOW_CHAMBER:
@@ -247,6 +271,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_LOW_CHAMBER.ExtPos, Mode.DELIVER_TO_LOW_CHAMBER.ExtPos,Mode.DELIVER_TO_LOW_CHAMBER.ExtMax);
                 extPValue = Mode.DELIVER_TO_LOW_CHAMBER.ExtP;
                 EXTHOLDPOWER = Mode.DELIVER_TO_LOW_CHAMBER.ExtF;
+                extMaxPos = Mode.DELIVER_TO_LOW_CHAMBER.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case INTERMEDIATE:
@@ -257,6 +284,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.INTERMEDIATE.ExtPos, Mode.INTERMEDIATE.ExtPos,Mode.INTERMEDIATE.ExtMax);
                 extPValue = Mode.INTERMEDIATE.ExtP;
                 EXTHOLDPOWER = Mode.INTERMEDIATE.ExtF;
+                extMaxPos = Mode.INTERMEDIATE.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case DELIVER_TO_OBSERVATION:
@@ -267,6 +297,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_OBSERVATION.ExtPos, Mode.DELIVER_TO_OBSERVATION.ExtPos,Mode.DELIVER_TO_OBSERVATION.ExtMax);
                 extPValue = Mode.DELIVER_TO_OBSERVATION.ExtP;
                 EXTHOLDPOWER = Mode.DELIVER_TO_OBSERVATION.ExtF;
+                extMaxPos = Mode.DELIVER_TO_OBSERVATION.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case DELIVER_TO_HIGH_CHAMBER:
@@ -277,6 +310,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_HIGH_CHAMBER.ExtPos, Mode.DELIVER_TO_HIGH_CHAMBER.ExtPos,Mode.DELIVER_TO_HIGH_CHAMBER.ExtMax);
                 extPValue = Mode.DELIVER_TO_HIGH_CHAMBER.ExtP;
                 EXTHOLDPOWER = Mode.DELIVER_TO_HIGH_CHAMBER.ExtF;
+                extMaxPos = Mode.DELIVER_TO_HIGH_CHAMBER.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case TANK_ENTRY:
@@ -287,6 +323,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = CommonLogic.CapValueint(Mode.TANK_ENTRY.ExtPos, Mode.TANK_ENTRY.ExtPos,Mode.TANK_ENTRY.ExtMax);
                 extPValue = Mode.TANK_ENTRY.ExtP;
                 EXTHOLDPOWER = Mode.TANK_ENTRY.ExtF;
+                extMaxPos = Mode.TANK_ENTRY.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             case STOP:
@@ -297,6 +336,9 @@ public class Arm extends BaseHardware {
                 extTargetPos = EM1.getCurrentPosition();
                 extPValue = Mode.STOP.ExtP;
                 EXTHOLDPOWER = Mode.STOP.ExtF;
+                extMaxPos = Mode.STOP.ExtMax;
+                CurrentMode = Mode.IDLE;
+
 
                 break;
             default:
@@ -328,7 +370,7 @@ public class Arm extends BaseHardware {
         //multiply update target by some amount then add to target pos.
         //wrap set value in cap
         int nTarget = (int) (extTargetPos + (updateTarget * extStepSize));
-        extTargetPos = CommonLogic.CapValueint(nTarget,CurrentMode.ExtPos,CurrentMode.ExtMax);
+        extTargetPos = CommonLogic.CapValueint(nTarget,0,extMaxPos);
     }
 
     public void setCurrentMode(Mode Nmode){
@@ -349,11 +391,12 @@ public class Arm extends BaseHardware {
         DELIVER_TO_LOW_CHAMBER(25,100,0,0,100,0,5),
         DELIVER_TO_HIGH_CHAMBER(30,100,0,0,100,0,5),
         DELIVER_TO_LOW_BASKET(1144,100,0,3000,100,0,3020),
-        DELIVER_TO_HIGH_BASKET(1450,100,0.30,2620,80,0.05,2583),
+        DELIVER_TO_HIGH_BASKET(1450,100,0.15,2620,80,0.05,2583),
         CLIMB(1000,100,0,1457,100,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5),
         INTERMEDIATE(1500, 100, 0, 500, 100, 0, 1600),
-        TANK_ENTRY(400,100,0,560,100,0,1716);
+        TANK_ENTRY(400,100,0,560,100,0,1716),
+        IDLE(0,0,0,0,0,0, 0);
 
         private int ArmPos;
         private double ArmP;

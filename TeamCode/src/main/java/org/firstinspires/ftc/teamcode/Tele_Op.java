@@ -272,7 +272,7 @@ public class Tele_Op extends OpMode {
         }
 
         if (CommonLogic.oneShot(gamepad2.start, gp2_prev_start)){
-            robot.arm.setWristUp();
+            //robot.arm.setWristUp();
             robot.intake.doStop();
             robot.arm.setCurrentMode(Arm.Mode.CLIMB);
 
@@ -287,13 +287,14 @@ public class Tele_Op extends OpMode {
 
         if (CommonLogic.oneShot(gamepad2.a, gp2_prev_a)) {
             robot.arm.setCurrentMode(Arm.Mode.START);
-            robot.arm.setWristUp();
+            //robot.arm.setWristUp();
             robot.intake.doStop();
         }
 
         if (CommonLogic.oneShot(gamepad2.b, gp2_prev_b)) {
             robot.arm.setCurrentMode(Arm.Mode.PICKUP_TANK);
-            robot.arm.setWristUp();
+            robot.arm.setWristDown();
+            robot.intake.doIn();
         }
 
         if (CommonLogic.oneShot(gamepad2.y, gp2_prev_y)) {
