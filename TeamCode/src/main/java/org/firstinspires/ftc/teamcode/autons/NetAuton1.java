@@ -119,7 +119,7 @@ public class NetAuton1 extends OpMode {
                 break;
             case _40_BearL1:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(10,-90,0, -90);
+                    robot.driveTrain.CmdDrive(16,-90,0, -90);
                     currentStage = stage._50_OutPut;
                 }
                 break;
