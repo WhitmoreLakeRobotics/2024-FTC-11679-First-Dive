@@ -139,7 +139,8 @@ public class Arm extends BaseHardware {
      * Example usage: Starting another thread.
      */
     public void start(){
-        setWristOut();   }
+       // setWristOut();
+    }
 
     /**
      * User defined loop method
@@ -154,7 +155,8 @@ public class Arm extends BaseHardware {
         telemetry.addData( " Arm Mode ", CurrentMode.toString());
 
         if((CommonLogic.inRange(AM1.getCurrentPosition(),armTargetPos,AMIntol) ) &&
-                ((CommonLogic.inRange(EM1.getCurrentPosition(),extTargetPos,EMIntol)) ){
+                ((CommonLogic.inRange(EM1.getCurrentPosition(),extTargetPos,EMIntol)) ))
+        {
             cmdComplete = true;
         }
         else{
