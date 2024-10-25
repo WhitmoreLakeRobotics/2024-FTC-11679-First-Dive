@@ -24,8 +24,10 @@ public class Arm extends BaseHardware {
     //private ColorRangeSensor IntakeSensor;
     //private DistanceSensor RearLeftSensor
 
-
-
+    private int EMIntol = 50;
+    private int AMIntol = 50;
+    private boolean EMINPos = true;
+    private boolean AMINPos = true;
     private boolean cmdComplete = true;
     private Mode CurrentMode = Mode.STOP;
     private DcMotor AM1;
@@ -151,6 +153,13 @@ public class Arm extends BaseHardware {
         telemetry.addData("EM2 ",EM2.getCurrentPosition());
         telemetry.addData( " Arm Mode ", CurrentMode.toString());
 
+        if((CommonLogic.inRange(AM1.getCurrentPosition(),armTargetPos,AMIntol) ) &&
+                ((CommonLogic.inRange(EM1.getCurrentPosition(),extTargetPos,EMIntol)) ){
+            cmdComplete = true;
+        }
+        else{
+            cmdComplete = false;
+        }
 
         AM1.setPower(CommonLogic.CapValue(
                 CommonLogic.PIDcalc(armPValue,ARMHOLDPOWER,AM1.getCurrentPosition(),armTargetPos)
@@ -354,6 +363,10 @@ public class Arm extends BaseHardware {
     }
 
 
+
+    public boolean getCmdComplete(){
+        return cmdComplete;
+    }
 
     /**
      * User defined stop method
