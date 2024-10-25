@@ -113,18 +113,33 @@ public class NetAuton1 extends OpMode {
                 if (robot.arm.getCmdComplete())     {
                    // robot.driveTrain.CmdDrive(0,-90,0,-90);
                     robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_BASKET);
-                    currentStage = stage._40_BearL1;
+                    currentStage = stage._35_In1;
                     // get from other code;
                 }
                 break;
+
+            case _35_In1:
+                if (robot.arm.getCmdComplete())  {
+                    robot.driveTrain.CmdDrive(2,-180,0.35, -90);
+                    currentStage = stage._40_BearL1;
+                }
+                break;
+
             case _40_BearL1:
                 if (robot.arm.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(10,-90,0.35, -90);
+                    robot.driveTrain.CmdDrive(13,-120,0.35, -90);
+                    currentStage = stage._48_Pause;
+                }
+                break;
+
+            case _48_Pause:
+                if (robot.driveTrain.getCmdComplete()){
+                    runtime.reset();
                     currentStage = stage._50_OutPut;
                 }
                 break;
             case _50_OutPut:
-                if (robot.driveTrain.getCmdComplete()){
+                if (runtime.milliseconds() >= 1000){
                     //robot.driveTrain.CmdDrive(0,-90,0,-90);
                     robot.intake.doOut();
                     runtime.reset();
@@ -135,7 +150,7 @@ public class NetAuton1 extends OpMode {
                 break;
             case _60_BearR1:
                 if (runtime.milliseconds() >= 2000) {
-                    robot.driveTrain.CmdDrive(2,0,0.35,-90);
+                    robot.driveTrain.CmdDrive(13,90,0.35,-90);
                     currentStage = stage._70_Arm_Retract;
                 }
 
@@ -159,6 +174,7 @@ public class NetAuton1 extends OpMode {
             case _85_Drive_left1:
                 if(robot.driveTrain.getCmdComplete()) {
                     robot.driveTrain.CmdDrive(12, -90, 0.35, -90);
+                    robot.arm.setCurrentMode(Arm.Mode.START);
                     currentStage = stage._90_Reverse1;
                 }
                 break;
@@ -274,7 +290,9 @@ public class NetAuton1 extends OpMode {
         _20_TurnL,
         _25_Forward0_5,
         _30_Deliver_To_High_Basket,
+        _35_In1,
         _40_BearL1,
+        _48_Pause,
         _50_OutPut,
         _60_BearR1,
         _70_Arm_Retract,
