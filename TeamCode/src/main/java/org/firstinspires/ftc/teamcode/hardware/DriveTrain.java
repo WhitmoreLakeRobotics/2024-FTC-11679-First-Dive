@@ -195,6 +195,10 @@ public class DriveTrain extends BaseHardware {
             case DRIVE_BY_SENSOR:
                 doDriveBySensor(sensorSelection);
                 break;
+            case COMMAND_TURN:
+                doTurn();
+                break;
+
         }
 
 
@@ -403,6 +407,26 @@ public class DriveTrain extends BaseHardware {
        double turn = CommonLogic.PIDcalc(stagPos,0,Gyro.getGyroHeading(),tHeading);
         telemetry.addData(TAGChassis,"turn power " + turn);
         return turn;
+    }
+
+    public void cmdTurn(int newHeading, double speed){
+        speed_AA = 0.0;
+        bearing_AA = 0.0;
+        Target_Heading = newHeading;
+
+        Current_Mode = Mode.COMMAND_TURN;
+    }
+
+    public void doTurn(){
+
+        if ( CommonLogic.inRange(Gyro.getGyroHeading(),Target_Heading,Gyro_Tol)  ){
+            stopMotors();
+            Current_Mode = Mode.STOPPED;
+        }else{
+            startDrive();
+        }
+
+
     }
 
     public void cmdDriveBySensors(double TargetDist,double Bearing, double speed, int Heading){
@@ -652,12 +676,13 @@ public class DriveTrain extends BaseHardware {
 
 
     public enum Mode{
-    DRIVE_AA,
+        DRIVE_AA,
         COMMAND_AA,
-    STOPPED,
-    TELEOP,
+        COMMAND_TURN,
+        STOPPED,
+        TELEOP,
         DRIVE_BY_SENSOR,
-VISION;
+        VISION;
 
 }
 }
