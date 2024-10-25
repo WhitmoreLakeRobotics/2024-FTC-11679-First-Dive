@@ -165,7 +165,7 @@ public class NetAuton4 extends OpMode {
 
             case _110_Drive_Left:
                 if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(9,-88,0.35,0);
+                    robot.driveTrain.CmdDrive(8,-88,0.35,0);
                     currentStage = stage._120_Reverse;}
                 break;
 
