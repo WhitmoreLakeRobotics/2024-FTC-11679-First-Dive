@@ -416,7 +416,7 @@ public class DriveTrain extends BaseHardware {
         speed_AA = 0.0;
         bearing_AA = 0.0;
         Target_Heading = newHeading;
-
+        resetEncoders();
         Current_Mode = Mode.COMMAND_TURN;
     }
 

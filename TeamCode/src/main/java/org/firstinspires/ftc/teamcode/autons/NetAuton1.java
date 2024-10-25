@@ -119,7 +119,7 @@ public class NetAuton1 extends OpMode {
                 break;
             case _40_BearL1:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(6,-90,0, -90);
+                    robot.driveTrain.CmdDrive(10,-90,0, -90);
                     currentStage = stage._50_OutPut;
                 }
                 break;
@@ -229,7 +229,7 @@ public class NetAuton1 extends OpMode {
             case _160_Extend_Arm:
                 if(robot.driveTrain.getCmdComplete()){
                     //robot.driveTrain.CmdDrive(0,0,0,90);
-                    robot.arm.setCurrentMode(Arm.Mode.CLIMB);
+                    robot.arm.setCurrentMode(Arm.Mode.START);
                     currentStage = stage._170_Drive_Right2;
                  // get from other code;
 
