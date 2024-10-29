@@ -30,6 +30,7 @@ private ColorRangeSensor NTKCRS1;
 
     public Servo NTKS01;   //intake servo
 
+    public boolean BTargetFound = false;
     public boolean cmdComplete = true;
     public Mode CurrentMode = Mode.STOP;
     public final double StopPos = 0.5;
@@ -127,6 +128,12 @@ private ColorRangeSensor NTKCRS1;
         getSenDist();
         if(CommonLogic.inRange(NTKdistance,PickupDistance,PickupDistanceTol)){
             CurrentMode = Mode.STOP;
+            BTargetFound = true;
+
+
+        }
+        else{
+            BTargetFound = false;
         }
     }
 
