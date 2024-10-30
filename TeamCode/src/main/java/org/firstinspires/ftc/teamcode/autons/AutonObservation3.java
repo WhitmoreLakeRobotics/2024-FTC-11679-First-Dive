@@ -174,18 +174,26 @@ public class AutonObservation3 extends OpMode {
             case _120_Reverse:
                 if (robot.driveTrain.getCmdComplete()){
                 robot.driveTrain.CmdDrive(44,180,0.35,0);
-                currentStage = stage._130_End;}
+                currentStage = stage._130_Forward;}
+                break;
+
+
+            case _130_Forward:
+                if (robot.driveTrain.getCmdComplete()){
+                    robot.driveTrain.CmdDrive(12,0,0.35,0);
+                    currentStage = stage._140_Drive_Left;}
+                break;
+
+
+            case _140_Drive_Left:
+                if (robot.driveTrain.getCmdComplete()){
+                    robot.driveTrain.CmdDrive(132,-90,0.35,0);
+                    currentStage = stage._150_End;}
                 break;
 
 
 
-
-
-
-
-
-
-            case _130_End:
+            case _150_End:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.stop();
 
@@ -221,7 +229,9 @@ public class AutonObservation3 extends OpMode {
         _105_Forward,
         _110_Drive_Right,
         _120_Reverse,
-        _130_End
+        _130_Forward,
+        _140_Drive_Left,
+        _150_End
         //contactbar;
 
     }
