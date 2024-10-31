@@ -9,6 +9,7 @@ public class Robot extends BaseHardware {
     public Sensors sensors = new Sensors();
     public Intake intake = new Intake();
     public Arm arm = new Arm();
+    public ThePointyStick thePointyStick = new ThePointyStick();
 
     @Override
     public void init() {
@@ -33,6 +34,10 @@ public class Robot extends BaseHardware {
         arm.telemetry = this.telemetry;
         arm.init();
 
+        thePointyStick.hardwareMap = this.hardwareMap;
+        thePointyStick.telemetry = this.telemetry;
+        thePointyStick.init();
+
 
 
 
@@ -45,6 +50,7 @@ public class Robot extends BaseHardware {
         sensors.init_loop();
         intake.init_loop();
         arm.init_loop();
+        thePointyStick.init_loop();
     }
 
     @Override
@@ -54,6 +60,7 @@ public class Robot extends BaseHardware {
         sensors.start();
         intake.start();
         arm.start();
+        thePointyStick.start();
 
        // lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }
@@ -65,6 +72,7 @@ public class Robot extends BaseHardware {
         sensors.loop();
         intake.loop();
         arm.loop();
+        thePointyStick.loop();
     }
 
 
@@ -75,6 +83,7 @@ public class Robot extends BaseHardware {
         sensors.stop();
         intake.stop();
         arm.stop();
+        thePointyStick.stop();
 
        // lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }

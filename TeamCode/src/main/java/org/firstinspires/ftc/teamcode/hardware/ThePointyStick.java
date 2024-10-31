@@ -1,18 +1,15 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
-import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.common.CommonLogic;
 
 /**
  * Base class for FTC Team 8492 defined hardware
  */
-public class Sensors extends BaseHardware {
+public class ThePointyStick extends BaseHardware {
 
     private ElapsedTime runtime = new ElapsedTime();
     /**
@@ -28,6 +25,13 @@ public class Sensors extends BaseHardware {
 
     private boolean cmdComplete = true;
     private Mode CurrentMode = Mode.STOP;
+    public Servo TPS01;
+
+    public final double NoTouchy = 0.9;
+    public final double Touchy = 0.95;
+
+
+
 
 
 
@@ -53,9 +57,11 @@ public class Sensors extends BaseHardware {
      * This method will be called once when the INIT button is pressed.
      */
     public void init(){
-        //DeliverySensor = hardwareMap.get(ColorRangeSensor.class, "DeliveryS");
-       // RearLeftSensor = hardwareMap.get(DistanceSensor.class, "RearLeftS");
+        TPS01 = hardwareMap.get(Servo.class,"TPS01");
     }
+
+
+
 
     /**
      * User defined init_loop method
@@ -63,9 +69,8 @@ public class Sensors extends BaseHardware {
      * This method will be called repeatedly when the INIT button is pressed.
      * This method is optional. By default this method takes no action.
      */
-     public void init_loop() {
-//         telemetry.addData("FLDS1 Pos " , FLDS1.getDistance(DistanceUnit.INCH)) ;
-     }
+    public void init_loop() {
+    }
 
     /**
      * User defined start method.
@@ -104,23 +109,21 @@ public class Sensors extends BaseHardware {
      */
     void stop(){
 
-}
+    }
+
+    public void setNoTouchy(){TPS01.setPosition(NoTouchy);}
+    public void setTouchy(){TPS01.setPosition(Touchy);}
 
 
 
-
-
-private enum Mode{
-    STOP,
-    READ,
-    UP,
-    READPOS,
-    COLORFOUND
-}
+    private enum Mode{
+        STOP;
+    }
 
 
 
 
 
 }
+
 

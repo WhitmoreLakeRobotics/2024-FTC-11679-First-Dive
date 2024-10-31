@@ -91,6 +91,7 @@ public class NetAuton1 extends OpMode {
         switch (currentStage) {
             case _unknown:
                 currentStage = stage._00_preStart;
+                robot.thePointyStick.setNoTouchy();
                 break;
             case _00_preStart:
                 currentStage = stage._10_Forward0;
@@ -149,7 +150,7 @@ public class NetAuton1 extends OpMode {
 
                 break;
             case _60_BearR1:
-                if (runtime.milliseconds() >= 2000) {
+                if (runtime.milliseconds() >= 1000) {
                     robot.driveTrain.CmdDrive(10,90,0.35,-90);
                     currentStage = stage._70_Arm_Retract;
                 }
@@ -173,14 +174,14 @@ public class NetAuton1 extends OpMode {
 
             case _82_Drive_Out1_2:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(32, 0, 0.60, -90);
+                    robot.driveTrain.CmdDrive(29, 0, 0.60, -90);
                     currentStage = stage._84_Drive_Out1_3;
                 }
                 break;
 
             case _84_Drive_Out1_3:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(4, 0, 0.35, -90);
+                    robot.driveTrain.CmdDrive(3, 0, 0.35, -90);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
                     robot.intake.doIn();
                     currentStage = stage._85_Drive_left1;
@@ -204,15 +205,15 @@ public class NetAuton1 extends OpMode {
                 break;
 
             case _90_Snuffle2:
-                if(robot.intake.BTargetFound || (runtime.milliseconds() >= 1500)){
-                    robot.driveTrain.CmdDrive(21,-180,0.35,-90);
+                if(robot.intake.BTargetFound || (runtime.milliseconds() >= 1000)){
+                    robot.driveTrain.CmdDrive(24,-180,0.35,-90);
                     robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
                     currentStage = stage._100_Forward1;
 
                 }
 
                 else{
-                    robot.arm.updateExtension(2);
+                    robot.arm.updateExtension(1.00);
                 }
 
                 break;
@@ -225,22 +226,22 @@ public class NetAuton1 extends OpMode {
 
                 break;
             case _105_Drive_left2:
-                if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(21,-180,0.35,-90);
+                if (robot.arm.getCmdComplete())     {
+                    robot.driveTrain.CmdDrive(24,-180,0.35,-90);
                     currentStage = stage._110_Reverse2;
                 }
 
                 break;
             case _110_Reverse2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    //robot.driveTrain.CmdDrive(0,-180,0.35,-90);
+                    robot.driveTrain.CmdDrive(8,-90,0.35,-90);
                     currentStage = stage._120_Forward2;
                 }
 
                 break;
             case _120_Forward2:
                 if (robot.driveTrain.getCmdComplete())  {
-                   // robot.driveTrain.CmdDrive(0,-180,0.35,-90);
+                    //robot.driveTrain.CmdDrive(8,90,0.35,-90);
                     robot.intake.doOut();
                     runtime.reset();
                     currentStage = stage._125_Drive_left3;
@@ -249,7 +250,7 @@ public class NetAuton1 extends OpMode {
                 break;
             case _125_Drive_left3:
                 if (runtime.milliseconds() >= 500)  {
-                    robot.driveTrain.CmdDrive(8,0,0.35,-90);
+                    robot.driveTrain.CmdDrive(7,90,0.35,-90);
                     currentStage = stage._130_Reverse3;
                 }
 
@@ -263,23 +264,23 @@ public class NetAuton1 extends OpMode {
 
                 break;
             case _140_Forward3:
-                if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,0,0.35,-90);
+                if (robot.arm.getCmdComplete()){
+                   // robot.driveTrain.CmdDrive(0,0,0.35,-90);
                     currentStage = stage._150_HeadR1;
                 }
 
                 break;
             case _150_HeadR1:
-                if (robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.cmdTurn(90,0.35);
+                if (robot.arm.getCmdComplete()) {
+                    robot.driveTrain.CmdDrive(44,0,0.45,0);
+                    robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
                     currentStage = stage._160_Extend_Arm;
                 }
 
                 break;
             case _160_Extend_Arm:
                 if(robot.driveTrain.getCmdComplete()){
-                    //robot.driveTrain.CmdDrive(0,0,0,90);
-                    robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
+                    robot.driveTrain.cmdTurn(0,0.35);
                     currentStage = stage._170_Drive_Right2;
                  // get from other code;
 
@@ -288,7 +289,19 @@ public class NetAuton1 extends OpMode {
                 break;
             case _170_Drive_Right2:
                 if(robot.arm.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(0,90,0.35,-90);
+                    robot.driveTrain.CmdDrive(10,90,0.35,0);
+                    robot.arm.setCurrentMode(Arm.Mode.START);
+                    currentStage = stage._175_TOUCHY;
+
+
+                }
+
+                break;
+
+            case _175_TOUCHY:
+                if(robot.driveTrain.getCmdComplete()){
+                    robot.thePointyStick.setTouchy();
+                    runtime.reset();
                     currentStage = stage._180_End;
 
 
@@ -296,7 +309,7 @@ public class NetAuton1 extends OpMode {
 
                 break;
             case _180_End:
-                if(robot.driveTrain.getCmdComplete()){
+                if(runtime.milliseconds() >= 500){
                     robot.stop();
 
 
@@ -346,6 +359,7 @@ public class NetAuton1 extends OpMode {
         _150_HeadR1,
         _160_Extend_Arm,
         _170_Drive_Right2,
+        _175_TOUCHY,
         _180_End
         //contactbar;
 

@@ -47,7 +47,7 @@ public class Arm extends BaseHardware {
     private double armPValue = 50;
     private int armTargetPos = 0;
 
-    private static final double EXTSPEED = 0.75;
+    private static final double EXTSPEED = 0.85;
     private double EXTHOLDPOWER =0.00;
     private static final int minExtPos = 0;
     private static final int maxExtPos = 3090;
