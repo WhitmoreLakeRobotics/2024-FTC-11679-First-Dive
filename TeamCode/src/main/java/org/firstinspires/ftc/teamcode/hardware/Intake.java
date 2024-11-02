@@ -39,7 +39,7 @@ private ColorRangeSensor NTKCRS1;
 
     private Color SignalColor;
     private double NTKdistance; //in cm
-    private double PickupDistance = 7.00; //in cm
+    private double PickupDistance = 6.00; //in cm
     private double PickupDistanceTol = 4.25; //in cm
 
     private int SensorBlue;

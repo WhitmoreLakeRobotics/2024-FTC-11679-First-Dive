@@ -9,10 +9,10 @@ import org.firstinspires.ftc.teamcode.hardware.Arm;
 import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 //@Disabled
-@Autonomous(name = "NetAuton5", group = "Auton")
+@Autonomous(name = "NetAuton6", group = "Auton")
 // @Autonomous(...) is the other common choice
 
-public class NetAuton5 extends OpMode {
+public class NetAuton6 extends OpMode {
 
     //RobotComp robot = new RobotComp();
     Robot robot = new Robot();
@@ -240,13 +240,14 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _120_Output2:
-                if (runtime.milliseconds() >= 1000)  {
+                if (runtime.milliseconds() >= 500)  {
+                    //500 was 1000 above;
                     //robot.driveTrain.CmdDrive(8,90,0.35,-90);
                     robot.intake.doOut();
                     runtime.reset();
                     currentStage = stage._125_Drive_right1;
                 }
-
+               //500 was 1000 above;
                 break;
             case _125_Drive_right1:
                 if (runtime.milliseconds() >= 500)  {
@@ -259,7 +260,7 @@ public class NetAuton5 extends OpMode {
                 if (robot.driveTrain.getCmdComplete()){
                     // robot.driveTrain.CmdDrive(47,-180,0.35,-90);
                     robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
-                    currentStage = stage._260_XXYYZZ;
+                    currentStage = stage._140_Forward2;
                 }
 
             case _140_Forward2:
@@ -338,7 +339,8 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _230_Output3:
-                if (runtime.milliseconds() >= 1000)  {
+                if (runtime.milliseconds() >= 500)  {
+                    //500 was 1000;
                     //robot.driveTrain.CmdDrive(8,90,0.35,-90);
                     robot.intake.doOut();
                     runtime.reset();
@@ -357,7 +359,7 @@ public class NetAuton5 extends OpMode {
                 if (robot.driveTrain.getCmdComplete()){
                     // robot.driveTrain.CmdDrive(47,-180,0.35,-90);
                     robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
-                    currentStage = stage._260_XXYYZZ;
+                    currentStage = stage._260_Im_Useless;
                 }
 
 
@@ -365,31 +367,31 @@ public class NetAuton5 extends OpMode {
 
 
                 break;
-            case _260_XXYYZZ:
+            case _260_Im_Useless:
                 if (robot.arm.getCmdComplete()){
                     // robot.driveTrain.CmdDrive(0,0,0.35,-90);
-                    currentStage = stage._270_HeadR1;
+                    currentStage = stage._270_Forward3;
                 }
 
                 break;
-            case _270_HeadR1:
+            case _270_Forward3:
                 if (robot.arm.getCmdComplete()) {
                     robot.driveTrain.CmdDrive(44,0,0.45,0);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
-                    currentStage = stage._280_Extend_Arm;
+                    currentStage = stage._280_To_Turn_Or_Not_To_Turn;
                 }
 
                 break;
-            case _280_Extend_Arm:
+            case _280_To_Turn_Or_Not_To_Turn:
                 if(robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.cmdTurn(0,0.35);
-                    currentStage = stage._290_Drive_Right2;
+                    currentStage = stage._290_Drive_Right3;
                     // get from other code;
 
                 }
 
                 break;
-            case _290_Drive_Right2:
+            case _290_Drive_Right3:
                 if(robot.arm.getCmdComplete()){
                     robot.driveTrain.CmdDrive(10,90,0.35,0);
                     robot.arm.setCurrentMode(Arm.Mode.START);
@@ -469,13 +471,14 @@ public class NetAuton5 extends OpMode {
         _230_Output3,
         _240_Drive_Right2,
         _250_Arm_Inter,
-        _260_XXYYZZ,
-        _270_HeadR1,
-        _280_Extend_Arm,
-        _290_Drive_Right2,
+        
+        _260_Im_Useless,
+        _270_Forward3,
+        _280_To_Turn_Or_Not_To_Turn,
+        _290_Drive_Right3,
         _300_TOUCHY,
         _310_End
-        //contactbar;
+
 
     }
 }
