@@ -249,7 +249,7 @@ public class NetAuton5 extends OpMode {
                 break;
             case _125_Drive_right1:
                 if (runtime.milliseconds() >= 500)  {
-                    robot.driveTrain.CmdDrive(7,90,0.35,-90);
+                    robot.driveTrain.CmdDrive(4,90,0.35,-90);
                     currentStage = stage._130_Arm_Inter;
                 }
 
@@ -330,7 +330,7 @@ public class NetAuton5 extends OpMode {
                 break;
             case _220_Drive_left3:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(8,-90,0.35,-90);
+                    robot.driveTrain.CmdDrive(5,-90,0.35,-90);
                     currentStage = stage._230_Output3;
                 }
 
