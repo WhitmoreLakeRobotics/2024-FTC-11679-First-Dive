@@ -167,6 +167,12 @@ public class Tele_Op extends OpMode {
             }
 
         }
+
+        if (Math.abs(gamepad1.right_stick_y) > Settings.JOYSTICK_DEADBAND_STICK) {
+            robot.arm.updateExtension(gamepad1.right_stick_y * -1);
+
+
+        }
         //***********   Pushers
         //if (CommonLogic.oneShot(gamepad1.a, gp1_prev_a)) {
         if (gamepad1.a) {
@@ -431,7 +437,7 @@ public class Tele_Op extends OpMode {
         if(x){
             return 135;
         }else{
-            return 175;
+            return -135;
         }
     }
     else if(x){
