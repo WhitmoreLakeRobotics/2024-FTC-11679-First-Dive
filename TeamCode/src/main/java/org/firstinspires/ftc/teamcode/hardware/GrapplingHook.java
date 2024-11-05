@@ -57,6 +57,8 @@ public class GrapplingHook extends BaseHardware {
         GHS01 = hardwareMap.get(Servo.class,"GHS01");
         GHS02 = hardwareMap.get(Servo.class,"GHS02");
 
+        GHS01.setPosition( 0.5 );
+        GHS01.setPosition( 0.5 );
     }
 
 
@@ -98,8 +100,9 @@ public class GrapplingHook extends BaseHardware {
 
     public void updateServo( double y ){
         double x = y/2 + 0.5;     // converting joystick position to servo position;
-        GHS01.setPosition( x );
-        GHS02.setPosition( -x );
+        double x2 = -y/2 + 0.5;
+        GHS01.setPosition( x2 );
+        GHS02.setPosition( x );
 
             }
 

@@ -236,7 +236,7 @@ public class NetAuton7 extends OpMode {
 
             case _112_Scoring_Drive1_2:
                 if (robot.arm.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(20,-145,0.35,-135);
+                    robot.driveTrain.CmdDrive(20,-145,0.60,-135);
                     runtime.reset();
                     currentStage = stage._114_Scoring_Drive1_3;
                 }

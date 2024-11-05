@@ -332,7 +332,11 @@ public class Tele_Op extends OpMode {
 
             robot.grapplingHook.updateServo(gamepad2.left_stick_y);
         }
-        
+
+        else{
+            robot.grapplingHook.updateServo(0);
+        }
+
         //robot.swing_arm_and_lift.LiftPos(robot.swing_arm_and_lift.LASTLIFTPOSITION + (int)(gamepad2.right_stick_y) * 5);
 
         if (Math.abs(gamepad2.right_stick_y) > Settings.JOYSTICK_DEADBAND_STICK) {
