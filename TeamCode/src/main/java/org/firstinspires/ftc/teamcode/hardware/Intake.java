@@ -35,7 +35,7 @@ private ColorRangeSensor NTKCRS1;
     public Mode CurrentMode = Mode.STOP;
     public final double StopPos = 0.5;
     public final double InPos = 0;
-    public final double OutPos = 1;
+    public final double OutPos = 0.75;
 
     private Color SignalColor;
     private double NTKdistance; //in cm

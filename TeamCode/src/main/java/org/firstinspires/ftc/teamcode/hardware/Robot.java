@@ -10,6 +10,7 @@ public class Robot extends BaseHardware {
     public Intake intake = new Intake();
     public Arm arm = new Arm();
     public ThePointyStick thePointyStick = new ThePointyStick();
+    public GrapplingHook grapplingHook = new GrapplingHook();
 
     @Override
     public void init() {
@@ -38,7 +39,9 @@ public class Robot extends BaseHardware {
         thePointyStick.telemetry = this.telemetry;
         thePointyStick.init();
 
-
+        grapplingHook.hardwareMap = this.hardwareMap;
+        grapplingHook.telemetry = this.telemetry;
+        grapplingHook.init();
 
 
     }
@@ -51,6 +54,7 @@ public class Robot extends BaseHardware {
         intake.init_loop();
         arm.init_loop();
         thePointyStick.init_loop();
+        grapplingHook.init_loop();
     }
 
     @Override
@@ -61,6 +65,7 @@ public class Robot extends BaseHardware {
         intake.start();
         arm.start();
         thePointyStick.start();
+        grapplingHook.start();
 
        // lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }
@@ -73,6 +78,7 @@ public class Robot extends BaseHardware {
         intake.loop();
         arm.loop();
         thePointyStick.loop();
+        grapplingHook.loop();
     }
 
 
@@ -84,6 +90,7 @@ public class Robot extends BaseHardware {
         intake.stop();
         arm.stop();
         thePointyStick.stop();
+        grapplingHook.stop();
 
        // lighting.UpdateBaseColor(RevBlinkinLedDriver.BlinkinPattern.WHITE);
     }
