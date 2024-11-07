@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -47,7 +46,7 @@ public class Arm extends BaseHardware {
     private double armPValue = 50;
     private int armTargetPos = 0;
 
-    private static final double EXTSPEED = 0.85;
+    private static final double EXTSPEED = 1.00;
     private double EXTHOLDPOWER =0.00;
     private static final int minExtPos = 0;
     private static final int maxExtPos = 3090;
@@ -274,15 +273,15 @@ public class Arm extends BaseHardware {
 
 
                 break;
-            case DELIVER_TO_LOW_CHAMBER:
-                armTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_LOW_CHAMBER.ArmPos, minArmPos,maxArmPos);
-                armPValue = Mode.DELIVER_TO_LOW_CHAMBER.ArmP;
-                ARMHOLDPOWER = Mode.DELIVER_TO_LOW_CHAMBER.ArmF;
+            case CLIMB2:
+                armTargetPos = CommonLogic.CapValueint(Mode.CLIMB2.ArmPos, minArmPos,maxArmPos);
+                armPValue = Mode.CLIMB2.ArmP;
+                ARMHOLDPOWER = Mode.CLIMB2.ArmF;
 
-                extTargetPos = CommonLogic.CapValueint(Mode.DELIVER_TO_LOW_CHAMBER.ExtPos, Mode.DELIVER_TO_LOW_CHAMBER.ExtPos,Mode.DELIVER_TO_LOW_CHAMBER.ExtMax);
-                extPValue = Mode.DELIVER_TO_LOW_CHAMBER.ExtP;
-                EXTHOLDPOWER = Mode.DELIVER_TO_LOW_CHAMBER.ExtF;
-                extMaxPos = Mode.DELIVER_TO_LOW_CHAMBER.ExtMax;
+                extTargetPos = CommonLogic.CapValueint(Mode.CLIMB2.ExtPos, Mode.CLIMB2.ExtPos,Mode.CLIMB2.ExtMax);
+                extPValue = Mode.CLIMB2.ExtP;
+                EXTHOLDPOWER = Mode.CLIMB2.ExtF;
+                extMaxPos = Mode.CLIMB2.ExtMax;
                 CurrentMode = Mode.IDLE;
 
 
@@ -403,15 +402,18 @@ public class Arm extends BaseHardware {
         PICKUP_GROUND(0,100,0,138,100,0,160),
         PICKUP_WALL(15,100,0,0,100,0,5),
         DELIVER_TO_OBSERVATION(20,100,0,0,100,0,5),
-        DELIVER_TO_LOW_CHAMBER(25,100,0,0,100,0,5),
+        CLIMB2(1600,100,0,500,100,0,550),
         DELIVER_TO_HIGH_CHAMBER(30,100,0,0,100,0,5),
-        DELIVER_TO_LOW_BASKET(1144,100,0,3000,100,0,3020),
+        DELIVER_TO_LOW_BASKET(1200,100,0,3000,100,0,3020),
+        //DELIVER_TO_LOW_BASKET(1144,100,0,3000,100,0,3020),
         DELIVER_TO_HIGH_BASKET(1450,100,0.15,2620,80,0.05,2583),
-        CLIMB(1000,100,0,1457,100,0,1460),
+        CLIMB(1290,100,0,2500,100,0,3000),
+       // CLIMB(1000,100,0,1457,100,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5),
         INTERMEDIATE(1500, 100, 0, 500, 100, 0, 1600),
         TANK_ENTRY(400,100,0,560,100,0,1716),
         IDLE(0,0,0,0,0,0, 0);
+
 
         private int ArmPos;
         private double ArmP;
