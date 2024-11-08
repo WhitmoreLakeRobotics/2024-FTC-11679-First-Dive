@@ -126,7 +126,7 @@ public class NetAuton5 extends OpMode {
                 break;
 
             case _40_BearL1:
-                if (robot.arm.getCmdComplete())  {
+                if (robot.driveTrain.getCmdComplete())  {
                     robot.driveTrain.CmdDrive(14,-120,0.35, -90);
                     currentStage = stage._48_Pause;
                 }

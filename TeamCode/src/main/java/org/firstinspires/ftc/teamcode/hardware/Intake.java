@@ -36,6 +36,7 @@ private ColorRangeSensor NTKCRS1;
     public final double StopPos = 0.5;
     public final double InPos = 0;
     public final double OutPos = 0.75;
+    public final double SlowPos = 0.05;
 
     private Color SignalColor;
     private double NTKdistance; //in cm
@@ -112,6 +113,9 @@ private ColorRangeSensor NTKCRS1;
              break;
          case IN:
 
+             break;   // idk but ok;
+         case SLOW:
+
          AutoStopIntake();
              break;
          //make case for each option
@@ -127,7 +131,7 @@ private ColorRangeSensor NTKCRS1;
     private void  AutoStopIntake() {
         getSenDist();
         if(CommonLogic.inRange(NTKdistance,PickupDistance,PickupDistanceTol)){
-            CurrentMode = Mode.STOP;
+            CurrentMode = Mode.SLOW;
             BTargetFound = true;
 
 
@@ -195,11 +199,18 @@ NTKS01.setPosition(OutPos);
         cmdComplete = true;
     }
 
+    public void doSlow(){
+        CurrentMode = Mode.SLOW;
+        NTKS01.setPosition(SlowPos);
+        cmdComplete = true;
+    }
+
 
 public enum Mode {
     IN,
     OUT,
-    STOP;
+    STOP,
+    SLOW;
 
 
 }
