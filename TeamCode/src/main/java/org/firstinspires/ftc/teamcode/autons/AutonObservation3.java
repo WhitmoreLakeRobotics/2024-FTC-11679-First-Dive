@@ -110,100 +110,100 @@ public class AutonObservation3 extends OpMode {
                 if (robot.driveTrain.getCmdComplete()){
                 robot.driveTrain.CmdDrive(16,90,0.35,0);
                 currentStage = stage._40_Forward;}
-                break;
 
 
-            case _40_Forward:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(46,0,0.35,0);
-                currentStage = stage._60_Drive_Right;}
-                break;
-
-            case _60_Drive_Right:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(11,90,0.35,0);
-                currentStage = stage._80_Reverse;}
-                break;
+        break;
 
 
-            case _80_Reverse:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(44,180,0.35,0);
-                currentStage = stage._85_Forward;}
-                break;
+        case _40_Forward:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(46,0,0.35,0);
+            currentStage = stage._60_Drive_Right;}
+        break;
+
+        case _60_Drive_Right:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(11,90,0.35,0);
+            currentStage = stage._80_Reverse;}
+        break;
 
 
-            case _85_Forward:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(44,0,0.35,0);
-                currentStage = stage._90_Drive_Right;}
-                break;
+        case _80_Reverse:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(44,180,0.35,0);
+            currentStage = stage._85_Forward;}
+        break;
 
 
-            case _90_Drive_Right:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(11,90,0.35,0);
-                currentStage = stage._100_Reverse;}
-                break;
+        case _85_Forward:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(44,0,0.35,0);
+            currentStage = stage._90_Drive_Right;}
+        break;
 
 
-
-
-            case _100_Reverse:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(44,180,0.35,0);
-                currentStage = stage._105_Forward;}
-                break;
-
-
-            case _105_Forward:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(44,0,0.35,0);
-                currentStage = stage._110_Drive_Right;}
-                break;
-
-
-            case _110_Drive_Right:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(8,90,0.35,0);
-                currentStage = stage._120_Reverse;}
-                break;
+        case _90_Drive_Right:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(11,90,0.35,0);
+            currentStage = stage._100_Reverse;}
+        break;
 
 
 
-            case _120_Reverse:
-                if (robot.driveTrain.getCmdComplete()){
-                robot.driveTrain.CmdDrive(44,180,0.35,0);
-                currentStage = stage._130_Forward;}
-                break;
+
+        case _100_Reverse:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(44,180,0.35,0);
+            currentStage = stage._105_Forward;}
+        break;
 
 
-            case _130_Forward:
-                if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(12,0,0.35,0);
-                    currentStage = stage._140_Drive_Left;}
-                break;
+        case _105_Forward:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(44,0,0.35,0);
+            currentStage = stage._110_Drive_Right;}
+        break;
 
 
-            case _140_Drive_Left:
-                if (robot.driveTrain.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(132,-90,0.35,0);
-                    currentStage = stage._150_End;}
-                break;
+        case _110_Drive_Right:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(8,90,0.35,0);
+            currentStage = stage._120_Reverse;}
+        break;
 
 
 
-            case _150_End:
-                if(robot.driveTrain.getCmdComplete()){
-                    robot.stop();
+        case _120_Reverse:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(44,180,0.35,0);
+            currentStage = stage._130_Forward;}
+        break;
 
 
-                }
+        case _130_Forward:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(12,0,0.35,0);
+            currentStage = stage._140_Drive_Left;}
+        break;
 
-                break;
+
+        case _140_Drive_Left:
+        if (robot.driveTrain.getCmdComplete()){
+            robot.driveTrain.CmdDrive(132,-90,0.35,0);
+            currentStage = stage._150_End;}
+        break;
+
+
+
+        case _150_End:
+        if(robot.driveTrain.getCmdComplete()){
+            robot.stop();
+
+
         }
 
-
+        break;
+    }
 
     }  //  loop
 

@@ -36,7 +36,7 @@ private ColorRangeSensor NTKCRS1;
     public final double StopPos = 0.5;
     public final double InPos = 0;
     public final double OutPos = 0.75;
-    public final double SlowPos = 0.05;
+    public final double SlowPos = 0.10;
 
     private Color SignalColor;
     private double NTKdistance; //in cm

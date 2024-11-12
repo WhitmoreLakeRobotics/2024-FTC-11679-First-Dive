@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import android.hardware.Sensor;
+
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import java.util.concurrent.Callable;
 
@@ -29,7 +33,9 @@ public class GrapplingHook extends BaseHardware {
     private Mode CurrentMode = Mode.STOP;
     public Servo GHS01;
     public Servo GHS02;
+    public ColorRangeSensor BCS01;
 
+    private static double TargetDistance = 1.15; //in inches;
 
     /**
      * Hardware Mappings
@@ -58,7 +64,9 @@ public class GrapplingHook extends BaseHardware {
         GHS02 = hardwareMap.get(Servo.class,"GHS02");
 
         GHS01.setPosition( 0.5 );
-        GHS01.setPosition( 0.5 );
+        GHS02.setPosition( 0.5 );
+
+        BCS01 = hardwareMap.get(ColorRangeSensor.class, "BCS01");
     }
 
 
@@ -117,6 +125,17 @@ public class GrapplingHook extends BaseHardware {
     void stop(){
 
     }
+
+    public boolean TheFloorIsLava(){
+        if (BCS01.getDistance(DistanceUnit.INCH) >= TargetDistance){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
 
     private enum Mode{
         STOP;

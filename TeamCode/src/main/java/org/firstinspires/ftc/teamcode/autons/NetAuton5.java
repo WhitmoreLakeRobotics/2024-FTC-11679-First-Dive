@@ -233,7 +233,7 @@ public class NetAuton5 extends OpMode {
                 break;
             case _110_Drive_left2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(9,-90,0.35,-90);
+                    robot.driveTrain.CmdDrive(10,-90,0.35,-90);
                     runtime.reset();
                     currentStage = stage._120_Output2;
                 }
@@ -391,7 +391,7 @@ public class NetAuton5 extends OpMode {
                 break;
             case _290_Drive_Right2:
                 if(robot.arm.getCmdComplete()){
-                    robot.driveTrain.CmdDrive(10,90,0.35,0);
+                    robot.driveTrain.CmdDrive(12,90,0.35,0);
                     robot.arm.setCurrentMode(Arm.Mode.START);
                     currentStage = stage._300_TOUCHY;
 
