@@ -274,8 +274,8 @@ public class NetAuton7 extends OpMode {
 
             break;
             case _125_Drive_Out1:
-                if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(4,30,0.35,-135);
+                if (runtime.milliseconds() >= 300)  {
+                    robot.driveTrain.CmdDrive(4,15,0.35,-135);
                     currentStage = stage._130_Arm_Inter;
                 }
 
@@ -306,7 +306,7 @@ public class NetAuton7 extends OpMode {
 
             case _150_Drive_Out1_3:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(4, 15, 0.35, -87);
+                    robot.driveTrain.CmdDrive(4.5, 15, 0.35, -87); //was 4 distance;
                     currentStage = stage._160_Forward2_3;
                 }
                 break;
@@ -365,7 +365,7 @@ public class NetAuton7 extends OpMode {
 
                 break;
             case _210_Scoring_Drive2:
-                if (robot.driveTrain.getCmdComplete())     {
+                if (robot.arm.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(4,-150,0.35,-142);
                     currentStage = stage._220_Scoring_Drive2_2;
                 }
@@ -374,13 +374,13 @@ public class NetAuton7 extends OpMode {
             case _220_Scoring_Drive2_2:
                 if (robot.driveTrain.getCmdComplete())  {
                     robot.driveTrain.CmdDrive(20,-150,0.60,-142);
-                    runtime.reset();
                     currentStage = stage._225_Scoring_Drive1_3;
                 }
                   break;
             case _225_Scoring_Drive1_3:
                 if (robot.driveTrain.getCmdComplete() && robot.arm.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(4,-150,0.35,-142);
+                    runtime.reset();
                     currentStage = stage._230_Output3;
                 }
 
@@ -399,7 +399,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _240_Drive_Out3:
                 if (runtime.milliseconds() >= 500)  {
-                    robot.driveTrain.CmdDrive(4,20,0.35,-142);
+                    robot.driveTrain.CmdDrive(4,15,0.35,-142);
                     currentStage = stage._250_Arm_Inter2;
                 }
 
@@ -414,13 +414,13 @@ public class NetAuton7 extends OpMode {
                 break;
             case _260_Drive_Out3_2:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(20,20,0.60,-142);
+                    robot.driveTrain.CmdDrive(20,15,0.60,-142);
                     currentStage = stage._265_Turn2_2;
                 }
                  break;
             case _265_Turn2_2:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.cmdTurn(-90,0.35);
+                    robot.driveTrain.cmdTurn(-85,0.35);
                     currentStage = stage._270_Drive_Out3_3;
                 }
 
@@ -431,14 +431,14 @@ public class NetAuton7 extends OpMode {
                 break;
             case _270_Drive_Out3_3:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,20,0.35,-90);
+                    robot.driveTrain.CmdDrive(4,15,0.35,-87);
                     currentStage = stage._280_Drive_left8;
                 }
 
                 break;
             case _280_Drive_left8:
-                if (robot.arm.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(2,-90,0.35,-90);
+                if (robot.driveTrain.getCmdComplete())     {
+                    robot.driveTrain.CmdDrive(2,-90,0.35,-87);
                     currentStage = stage._290_Arm_Pickup_Tank3;
                 }
 
@@ -473,7 +473,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _315_Turn3:
                 if(robot.arm.getCmdComplete()){
-                    robot.driveTrain.cmdTurn(-180,0.35);
+                    robot.driveTrain.cmdTurn(-142,0.35);
                     currentStage = stage._320_Delivery3;
                 }
 
@@ -488,22 +488,22 @@ public class NetAuton7 extends OpMode {
                 break;
             case _330_Scoring_Drive3:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-180,0.35,-180);
+                    robot.driveTrain.CmdDrive(4,-150,0.35,-142);
                     currentStage = stage._340_Scoring_Drive3_2;
                 }
 
                 break;
             case _340_Scoring_Drive3_2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(17,-180,0.60,-180);
-                    runtime.reset();
+                    robot.driveTrain.CmdDrive(17,-150,0.60,-142);
                     currentStage = stage._345_Scoring_Drive3_3;
                 }
 
                 break;
             case _345_Scoring_Drive3_3:
                 if (robot.driveTrain.getCmdComplete() && robot.arm.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-180,0.35,-180);
+                    robot.driveTrain.CmdDrive(4,-150,0.35,-142);
+                    runtime.reset();
                     currentStage = stage._350_Output4;
                 }
 
@@ -520,7 +520,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _360_Drive_Right3:
                 if (runtime.milliseconds() >= 500)  {
-                    robot.driveTrain.CmdDrive(6,45,0.35,-180);
+                    robot.driveTrain.CmdDrive(6,15,0.35,-142);
                     currentStage = stage._370_Arm_Inter3;
                 }
 
@@ -543,7 +543,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _380_Forward4:
                 if (robot.arm.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(44,45,0.60,0);
+                    robot.driveTrain.CmdDrive(44,15,0.60,0);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
                     currentStage = stage._390_Drive_Right3;
                 }
