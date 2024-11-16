@@ -10,10 +10,10 @@ import org.firstinspires.ftc.teamcode.hardware.Robot;
 
 
 //@Disabled
-@Autonomous(name = "NetAuton7", group = "Auton")
+@Autonomous(name = "NetAuton8", group = "Auton")
 // @Autonomous(...) is the other common choice
 
-public class NetAuton7 extends OpMode {
+public class NetAuton8 extends OpMode {
 
     //RobotComp robot = new RobotComp();
     Robot robot = new Robot();
@@ -166,7 +166,7 @@ public class NetAuton7 extends OpMode {
                     currentStage = stage._80_Forward1;
                     // get from other code;
                 }
-                 break;
+                break;
             case _80_Forward1:
                 if(robot.driveTrain.getCmdComplete()) {
                     robot.driveTrain.CmdDrive(4, 0, 0.35, -90);
@@ -219,10 +219,10 @@ public class NetAuton7 extends OpMode {
                 }
                 break;
             case _95_Turn1:
-             if(robot.arm.getCmdComplete()){
-                 robot.driveTrain.cmdTurn(-135,0.35);
-                 currentStage = stage._100_Delivery1;
-             }
+                if(robot.arm.getCmdComplete()){
+                    robot.driveTrain.cmdTurn(-135,0.35);
+                    currentStage = stage._100_Delivery1;
+                }
 
 
                 break;
@@ -278,10 +278,10 @@ public class NetAuton7 extends OpMode {
                 }
                 //500 was 1000 above;
 
-            break;
+                break;
             case _125_Drive_Out1:
                 if (runtime.milliseconds() >= 300)  {
-                    robot.driveTrain.CmdDrive(4,15,0.35,-135);
+                    robot.driveTrain.CmdDrive(4,35,0.35,-135);
                     currentStage = stage._130_Arm_Inter;
                 }
 
@@ -295,7 +295,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _140_Drive_Out1_2:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(14, 15, 0.60, -135);
+                    robot.driveTrain.CmdDrive(18,35, 0.60, -135);
                     currentStage = stage._145_Turn1_1;
                     //change 18;
                 }
@@ -312,14 +312,14 @@ public class NetAuton7 extends OpMode {
 
             case _150_Drive_Out1_3:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(4.5, 15, 0.35, -90); //was 4 distance;
+                    robot.driveTrain.CmdDrive(4, 35, 0.35, -90); //was 4 distance;
                     currentStage = stage._160_Forward2_3;
                 }
                 break;
 
             case _160_Forward2_3:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(3, -90, 0.35, -90);
+                    //robot.driveTrain.CmdDrive(3, -90, 0.35, -90);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
                     robot.intake.doIn();
                     currentStage = stage._170_Arm_Pickup_Tank2;
@@ -357,7 +357,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _195_Turn2:
                 if(robot.arm.getCmdComplete()){
-                    robot.driveTrain.cmdTurn(-150,0.35);
+                    robot.driveTrain.cmdTurn(-135,0.35);
                     currentStage = stage._200_Delivery2;
                 }
 
@@ -372,25 +372,25 @@ public class NetAuton7 extends OpMode {
                 break;
             case _210_Scoring_Drive2:
                 if (robot.arm.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-160,0.35,-150);
+                    robot.driveTrain.CmdDrive(4,-145,0.35,-135);
                     currentStage = stage._220_Scoring_Drive2_2;
                 }
 
                 break;
             case _220_Scoring_Drive2_2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(21,-160,0.60,-150);
+                    robot.driveTrain.CmdDrive(18,-145,0.60,-135);
                     currentStage = stage._225_Scoring_Drive1_3;
                 }
-                  break;
+                break;
             case _225_Scoring_Drive1_3:
                 if (robot.driveTrain.getCmdComplete() && robot.arm.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(3,-160,0.35,-150);
+                    robot.driveTrain.CmdDrive(4,-145,0.35,-135);
                     runtime.reset();
                     currentStage = stage._227_Pause3;
                 }
-               break;
-                       //all 150s were 160s;
+                break;
+            //all 150s were 160s;
 
             case _227_Pause3:
                 if (robot.driveTrain.getCmdComplete()){
@@ -412,7 +412,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _240_Drive_Out3:
                 if (runtime.milliseconds() >= 500)  {
-                    robot.driveTrain.CmdDrive(4,20,0.35,-142);
+                    robot.driveTrain.CmdDrive(4,35,0.35,-135);
                     currentStage = stage._250_Arm_Inter2;
                 }
 
@@ -427,35 +427,34 @@ public class NetAuton7 extends OpMode {
                 break;
             case _260_Drive_Out3_2:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(20,20,0.60,-142);
+                    robot.driveTrain.CmdDrive(18,35,0.60,-135);
                     currentStage = stage._265_Turn2_2;
                 }
-                 break;
+                break;
             case _265_Turn2_2:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.cmdTurn(-87,0.35);
+                    robot.driveTrain.cmdTurn(-90,0.35);
                     currentStage = stage._270_Drive_Out3_3;
                 }
 
                 break;
             case _270_Drive_Out3_3:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,20,0.35,-87);
+                    robot.driveTrain.CmdDrive(4,35,0.35,-90);
                     currentStage = stage._280_Drive_left8;
                 }
 
                 break;
             case _280_Drive_left8:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(2,-90,0.35,-87);
+                    //robot.driveTrain.CmdDrive(2,-90,0.35,-90);
                     currentStage = stage._290_Arm_Pickup_Tank3;
                 }
-                    break;
+
             case _290_Arm_Pickup_Tank3:
                 if(robot.driveTrain.getCmdComplete()) {
                     //robot.driveTrain.CmdDrive(0, 0, 0.35, -90);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_TANK);
-                    robot.intake.doIn();
                     currentStage = stage._300_Snuffle5;
                 }
                 break;
@@ -483,7 +482,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _315_Turn3:
                 if(robot.arm.getCmdComplete()){
-                    robot.driveTrain.cmdTurn(-150,0.35);
+                    robot.driveTrain.cmdTurn(-145,0.35);
                     currentStage = stage._320_Delivery3;
                 }
 
@@ -498,21 +497,21 @@ public class NetAuton7 extends OpMode {
                 break;
             case _330_Scoring_Drive3:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-150,0.35,-150);
+                    robot.driveTrain.CmdDrive(4,-145,0.35,-135);
                     currentStage = stage._340_Scoring_Drive3_2;
                 }
 
                 break;
             case _340_Scoring_Drive3_2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(19,-150,0.60,-150);
+                    robot.driveTrain.CmdDrive(18,-145,0.60,-135);
                     currentStage = stage._345_Scoring_Drive3_3;
                 }
 
                 break;
             case _345_Scoring_Drive3_3:
                 if (robot.driveTrain.getCmdComplete() && robot.arm.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-150,0.35,-150);
+                    robot.driveTrain.CmdDrive(4,-145,0.35,-135);
                     runtime.reset();
                     currentStage = stage._347_Pause4;
                 }

@@ -107,14 +107,17 @@ private ColorRangeSensor NTKCRS1;
          case STOP:
                 doStop();
 
+                break;
+         case SLOW:
+
+
              break;
          case OUT:
-
+             BTargetFound = false;
              break;
          case IN:
 
-             break;   // idk but ok;
-         case SLOW:
+
 
          AutoStopIntake();
              break;
@@ -132,6 +135,7 @@ private ColorRangeSensor NTKCRS1;
         getSenDist();
         if(CommonLogic.inRange(NTKdistance,PickupDistance,PickupDistanceTol)){
             CurrentMode = Mode.SLOW;
+            doSlow();
             BTargetFound = true;
 
 
