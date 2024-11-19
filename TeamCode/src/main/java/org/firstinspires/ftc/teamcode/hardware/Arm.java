@@ -88,26 +88,26 @@ public class Arm extends BaseHardware {
     public void init(){
         AM1 = hardwareMap.dcMotor.get("AM1");
         AM1.setDirection(DcMotor.Direction.REVERSE);
-        AM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        AM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // AM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // AM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         AM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         EM1 = hardwareMap.dcMotor.get("EM1");
         EM1.setDirection(DcMotor.Direction.REVERSE);
-        EM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        EM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // EM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // EM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         EM1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         AM2 = hardwareMap.dcMotor.get("AM2");
         AM2.setDirection(DcMotor.Direction.FORWARD);
-        AM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        AM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // AM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // AM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         AM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         EM2 = hardwareMap.dcMotor.get("EM2");
         EM2.setDirection(DcMotor.Direction.FORWARD);
-        EM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        EM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+       // EM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // EM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         EM2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         NTKA1 = hardwareMap.get(Servo.class,"NTKA1");
@@ -380,6 +380,22 @@ public class Arm extends BaseHardware {
 
     }
 
+    public void resetEncoders(){
+
+        AM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        AM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        EM1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        EM1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        AM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        AM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        EM2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        EM2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+    }
+
     public void updateExtension(double updateTarget){
         //multiply update target by some amount then add to target pos.
         //wrap set value in cap
@@ -391,6 +407,11 @@ public class Arm extends BaseHardware {
         //update to recieve and set mode
     CurrentMode = Nmode;
     }
+
+    public Mode getCurrentMode(){
+        return  CurrentMode;
+    }
+
     public void setWristUp(){NTKA1.setPosition(sUP);}
     public void setWristOut(){NTKA1.setPosition(sOUT);}
     public void setWristDown(){NTKA1.setPosition(sDOWN);}
@@ -399,7 +420,7 @@ public class Arm extends BaseHardware {
     public enum Mode{
         START(0,100,0,0,100,0,5),
         PICKUP_TANK(0,150,0,560,100,0,1716),
-        PICKUP_GROUND(0,100,0,138,100,0,160),
+        PICKUP_GROUND(0,100,0,138,100,0,1716),
         PICKUP_WALL(15,100,0,0,100,0,5),
         DELIVER_TO_OBSERVATION(20,100,0,0,100,0,5),
         CLIMB2(1000,100,0,1457,100,0,1460),

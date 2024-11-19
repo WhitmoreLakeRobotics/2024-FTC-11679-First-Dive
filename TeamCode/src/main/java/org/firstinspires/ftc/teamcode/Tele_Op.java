@@ -330,7 +330,7 @@ public class Tele_Op extends OpMode {
         if (Math.abs(gamepad2.left_stick_y) > Settings.JOYSTICK_DEADBAND_STICK) {
             //robot.subLifter.stickControl(-gamepad2.left_stick_y);
             //robot.capper.cmdTeleOp((gamepad2.left_stick_y * 0.5) + (gamepad2.right_stick_y * 0.5));
-            if(robot.grapplingHook.TheFloorIsLava()){
+            if(robot.grapplingHook.TheFloorIsLava()&& (robot.arm.getCurrentMode() == Arm.Mode.DELIVER_TO_HIGH_BASKET)){
                 robot.grapplingHook.updateServo(0.15);
                 robot.arm.setCurrentMode(Arm.Mode.CLIMB);
             }
