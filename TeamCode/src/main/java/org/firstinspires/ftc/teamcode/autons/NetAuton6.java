@@ -56,6 +56,7 @@ public class NetAuton6 extends OpMode {
 
         //Initialize Gyro
         robot.driveTrain.ResetGyro();
+        robot.arm.resetEncoders();
     }
 
     /*
