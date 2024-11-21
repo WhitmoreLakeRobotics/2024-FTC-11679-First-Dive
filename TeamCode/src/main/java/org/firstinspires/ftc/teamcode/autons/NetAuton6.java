@@ -372,14 +372,14 @@ public class NetAuton6 extends OpMode {
 
                 break;
             case _270_Forward3_2:
-                if (robot.arm.getCmdComplete())     {
+                if (robot.driveTrain.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(31.5,0,0.60,-90);
                     currentStage = stage._280_Forward3_3;
                 }
 
                 break;
             case _280_Forward3_3:
-                if (robot.arm.getCmdComplete())     {
+                if (robot.driveTrain.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(3,0,0.35,-90);
                     currentStage = stage._290_Arm_Pickup_Tank3;
                 }
