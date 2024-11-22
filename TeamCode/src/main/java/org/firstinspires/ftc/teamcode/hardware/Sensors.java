@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -55,6 +56,7 @@ public class Sensors extends BaseHardware {
     public void init(){
         //DeliverySensor = hardwareMap.get(ColorRangeSensor.class, "DeliveryS");
        // RearLeftSensor = hardwareMap.get(DistanceSensor.class, "RearLeftS");
+
     }
 
     /**

@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.common.CommonLogic;
 import org.firstinspires.ftc.teamcode.common.Settings;
 
@@ -13,6 +15,7 @@ import org.firstinspires.ftc.teamcode.common.Settings;
  */
 public class DriveTrain extends BaseHardware {
 
+    public DistanceSensor WallEway;  //auton wall distance sensor;
 
     private DcMotor LDM1 ;
     private DcMotor LDM2 ;
@@ -93,6 +96,9 @@ public class DriveTrain extends BaseHardware {
      * This method will be called once when the INIT button is pressed.
      */
     public void init() {
+
+        WallEway = hardwareMap.get(DistanceSensor.class, "WallEway");
+
 
         Gyro.telemetry = telemetry;
         Gyro.hardwareMap = hardwareMap;
@@ -203,6 +209,11 @@ public class DriveTrain extends BaseHardware {
 
 
     }
+
+    public DistanceSensor getWallEway() {
+        return WallEway;
+    }
+
     /**
      * User defined stop method
      * <p>
@@ -575,7 +586,7 @@ public class DriveTrain extends BaseHardware {
                 range = sensorRangeLeftFront;
                 break;
             case LEFT_SIDE:
-                range = sensorRangeLeftSide;
+                range = WallEway.getDistance(DistanceUnit.INCH);
                 break;
             case RIGHT_SIDE:
                 range = sensorRangeRightSide;
@@ -690,3 +701,4 @@ public class DriveTrain extends BaseHardware {
 
 }
 }
+
