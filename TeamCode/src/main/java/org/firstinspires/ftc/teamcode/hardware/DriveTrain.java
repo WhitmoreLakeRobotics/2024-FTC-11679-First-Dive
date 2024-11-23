@@ -445,7 +445,7 @@ public class DriveTrain extends BaseHardware {
     }
 
     public void cmdDriveBySensors(double TargetDist,double Bearing, double speed, int Heading){
-        cmdDriveBySensors(TargetDist,Bearing,speed,Heading, SensorSel.BOTH);
+        cmdDriveBySensors(TargetDist,Bearing,speed,Heading, SensorSel.LEFT_SIDE);
     }
     public void cmdDriveBySensors(double TargetDist,double Bearing, double speed, int Heading,SensorSel sel){
         sensorSelection = sel;
@@ -552,7 +552,8 @@ public class DriveTrain extends BaseHardware {
     private void doDriveBySensor(SensorSel sel  ){
        // double distance = sensorRange;
         // update speed_aa ;
-        speed_AA = (CommonLogic.goToPosStag(GetSensorRange(sel), Drive_Target,sensorTol,SensorDrive,stagPos,stagPow));
+        //speed_AA = (CommonLogic.goToPosStag(GetSensorRange(sel), Drive_Target,sensorTol,SensorDrive,stagPos,stagPow));
+        speed_AA = (CommonLogic.PIDcalc(5, 0,GetSensorRange(sel),Drive_Target));
         //telemetry.addData(TAGChassis,"sensor range " + sensorRange);
         //telemetry.addData(TAGChassis,"drive target " + Drive_Target);
         startDrive();
