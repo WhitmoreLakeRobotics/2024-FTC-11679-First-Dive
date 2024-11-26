@@ -186,7 +186,7 @@ public class NetAuton7 extends OpMode {
 
             case _84_Forward1_3:
                 if(robot.driveTrain.getCmdComplete()) {
-                    robot.driveTrain.cmdDriveBySensors(39.5, 0, 0.35, -90, DriveTrain.SensorSel.LEFT_SIDE);
+                    robot.driveTrain.cmdDriveBySensors(40, 0, 0.35, -90, DriveTrain.SensorSel.LEFT_SIDE);
                     robot.intake.doIn();
                     currentStage = stage._85_Arm_Pickup_Tank1;
                 }
@@ -498,7 +498,7 @@ public class NetAuton7 extends OpMode {
                 break;
             case _315_Turn3:
                 if(robot.arm.getCmdComplete()){
-                    robot.driveTrain.cmdTurn(-150,0.35);
+                    robot.driveTrain.cmdTurn(-142,0.35);
                     currentStage = stage._320_Delivery3;
                 }
 
@@ -513,21 +513,21 @@ public class NetAuton7 extends OpMode {
                 break;
             case _330_Scoring_Drive3:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-150,0.35,-150);
+                    robot.driveTrain.CmdDrive(4,-150,0.35,-142);
                     currentStage = stage._340_Scoring_Drive3_2;
                 }
 
                 break;
             case _340_Scoring_Drive3_2:
                 if (robot.driveTrain.getCmdComplete())  {
-                    robot.driveTrain.CmdDrive(16,-150,0.60,-150);
+                    robot.driveTrain.CmdDrive(16,-150,0.60,-142);
                     currentStage = stage._345_Scoring_Drive3_3;
                 }
 
                 break;
             case _345_Scoring_Drive3_3:
                 if (robot.driveTrain.getCmdComplete() && robot.arm.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(4,-150,0.35,-150);
+                    robot.driveTrain.CmdDrive(4,-150,0.35,-142);
                     runtime.reset();
                     currentStage = stage._347_Pause4;
                 }

@@ -22,7 +22,7 @@ public class DriveTrain extends BaseHardware {
     private DcMotor RDM1 ;
     private DcMotor RDM2 ;
 
-    private CommonGyro Gyro = new CommonGyro();
+    public CommonGyro Gyro = new CommonGyro();
    // private Vision vision = new Vision();
     /**
      * The {@link #telemetry} field contains an object in which a user may accumulate data which
@@ -553,7 +553,7 @@ public class DriveTrain extends BaseHardware {
        // double distance = sensorRange;
         // update speed_aa ;
         //speed_AA = (CommonLogic.goToPosStag(GetSensorRange(sel), Drive_Target,sensorTol,SensorDrive,stagPos,stagPow));
-        speed_AA = (CommonLogic.PIDcalc(5, 0,GetSensorRange(sel),Drive_Target));
+        speed_AA = (CommonLogic.PIDcalc(9, 0,GetSensorRange(sel),Drive_Target));
         //telemetry.addData(TAGChassis,"sensor range " + sensorRange);
         //telemetry.addData(TAGChassis,"drive target " + Drive_Target);
         startDrive();

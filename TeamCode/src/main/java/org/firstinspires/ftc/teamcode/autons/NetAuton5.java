@@ -140,7 +140,7 @@ public class NetAuton5 extends OpMode {
                 }
                 break;
             case _50_OutPut:
-                if (runtime.milliseconds() >= 800){
+                if (runtime.milliseconds() >= 600){
                     //robot.driveTrain.CmdDrive(0,-90,0,-90);
                     robot.intake.doOut();
                     runtime.reset();
@@ -150,7 +150,7 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _60_BearR1:
-                if (runtime.milliseconds() >= 800) {
+                if (runtime.milliseconds() >= 600) {
                     robot.driveTrain.CmdDrive(10,90,0.35,-90);
                     currentStage = stage._70_Arm_Retract;
                 }
@@ -241,7 +241,7 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _120_Output2:
-                if (runtime.milliseconds() >= 1000)  {
+                if (runtime.milliseconds() >= 600)  {
                     //robot.driveTrain.CmdDrive(8,90,0.35,-90);
                     robot.intake.doOut();
                     runtime.reset();
@@ -250,7 +250,7 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _125_Drive_right1:
-                if (runtime.milliseconds() >= 500)  {
+                if (runtime.milliseconds() >= 600)  {
                     robot.driveTrain.CmdDrive(4,90,0.35,-90);
                     currentStage = stage._130_Arm_Inter;
                 }
@@ -339,7 +339,7 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _230_Output3:
-                if (runtime.milliseconds() >= 1000)  {
+                if (runtime.milliseconds() >= 600)  {
                     //robot.driveTrain.CmdDrive(8,90,0.35,-90);
                     robot.intake.doOut();
                     runtime.reset();
@@ -348,7 +348,7 @@ public class NetAuton5 extends OpMode {
 
                 break;
             case _240_Drive_Right2:
-                if (runtime.milliseconds() >= 500)  {
+                if (runtime.milliseconds() >= 600)  {
                     robot.driveTrain.CmdDrive(7,90,0.35,-90);
                     currentStage = stage._250_Arm_Inter;
                 }
