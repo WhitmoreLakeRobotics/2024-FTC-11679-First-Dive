@@ -587,7 +587,10 @@ public class DriveTrain extends BaseHardware {
                 range = sensorRangeLeftFront;
                 break;
             case LEFT_SIDE:
-                range = WallEway.getDistance(DistanceUnit.INCH);
+
+               // CommonLogic.CapValue(WallEway.getDistance(DistanceUnit.INCH),0,80);
+                  range = CommonLogic.CapValue(WallEway.getDistance(DistanceUnit.INCH),0,80);
+               // range = WallEway.getDistance(DistanceUnit.INCH);
                 break;
             case RIGHT_SIDE:
                 range = sensorRangeRightSide;
