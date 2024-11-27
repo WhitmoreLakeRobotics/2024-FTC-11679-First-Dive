@@ -226,15 +226,17 @@ public class NetAuton6a extends OpMode {
                 if (robot.arm.getCmdComplete())     {
                     //robot.driveTrain.CmdDrive(0,-180,0.35,-90);
                     robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_BASKET);
-                    currentStage = stage._105_Reverse1;
+                    currentStage = stage._110_Drive_left2;
                 }
 
+               /*
                 break;
             case _105_Reverse1:
                 if (robot.arm.getCmdComplete())     {
                     robot.driveTrain.CmdDrive(24,-180,0.35,-90);
                     currentStage = stage._110_Drive_left2;
                 }
+                                 */
 
                 break;
             case _110_Drive_left2:

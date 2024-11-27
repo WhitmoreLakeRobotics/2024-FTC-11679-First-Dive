@@ -147,11 +147,11 @@ public class Arm extends BaseHardware {
      * This method will be called repeatedly in a loop while this op mode is running
      */
     public void loop(){
-        telemetry.addData("AM1 ",AM1.getCurrentPosition());
-        telemetry.addData("EM1 ",EM1.getCurrentPosition());
-        telemetry.addData("AM2 ",AM2.getCurrentPosition());
-        telemetry.addData("EM2 ",EM2.getCurrentPosition());
-        telemetry.addData( " Arm Mode ", CurrentMode.toString());
+       // telemetry.addData("AM1 ",AM1.getCurrentPosition());
+       // telemetry.addData("EM1 ",EM1.getCurrentPosition());
+        //telemetry.addData("AM2 ",AM2.getCurrentPosition());
+       // telemetry.addData("EM2 ",EM2.getCurrentPosition());
+       // telemetry.addData( " Arm Mode ", CurrentMode.toString());
 
         if((CommonLogic.inRange(AM1.getCurrentPosition(),armTargetPos,AMIntol) ) &&
                 ((CommonLogic.inRange(EM1.getCurrentPosition(),extTargetPos,EMIntol)) ))

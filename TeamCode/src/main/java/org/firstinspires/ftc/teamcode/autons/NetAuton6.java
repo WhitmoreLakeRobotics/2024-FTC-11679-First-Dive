@@ -286,7 +286,7 @@ public class NetAuton6 extends OpMode {
             case _160_Forward2_3:
                 if(robot.driveTrain.getCmdComplete()) {
                     //robot.driveTrain.CmdDrive(3, 0, 0.35, -90);
-                    robot.driveTrain.cmdDriveBySensors(40,0,0.35,-90, DriveTrain.SensorSel.LEFT_SIDE);
+                    robot.driveTrain.cmdDriveBySensors(39.5,0,0.35,-90, DriveTrain.SensorSel.LEFT_SIDE);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
                     robot.intake.doIn();
                     currentStage = stage._170_Arm_Pickup_Tank2;
@@ -313,21 +313,21 @@ public class NetAuton6 extends OpMode {
                 if(robot.intake.BTargetFound || (runtime.milliseconds() >= 1000)){
                     robot.driveTrain.CmdDrive(24,-180,0.45,-90);
                     robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
-                    currentStage = stage._200_Delivery2;
+                    currentStage = stage._210_Reverse2;
 
                 }
 
                 else{
                     robot.arm.updateExtension(1.00);
                 }
-
+                 /*
                 break;
             case _200_Delivery2:
                 if (robot.arm.getCmdComplete())     {
                     //robot.driveTrain.CmdDrive(0,-180,0.35,-90);
                     currentStage = stage._210_Reverse2;
                 }
-
+                  */
                 break;
             case _210_Reverse2:
                 if (robot.driveTrain.getCmdComplete())     {
@@ -388,7 +388,7 @@ public class NetAuton6 extends OpMode {
             case _280_Forward3_3:
                 if (robot.driveTrain.getCmdComplete())     {
                     //robot.driveTrain.CmdDrive(3,0,0.35,-90);
-                    robot.driveTrain.cmdDriveBySensors(40.5,-5,0.35,-90, DriveTrain.SensorSel.LEFT_SIDE);
+                    robot.driveTrain.cmdDriveBySensors(39.5,-5,0.35,-90, DriveTrain.SensorSel.LEFT_SIDE);
                     robot.arm.setCurrentMode(Arm.Mode.PICKUP_GROUND);
                     currentStage = stage._285_Slide_To_Left;
                 }
@@ -396,7 +396,7 @@ public class NetAuton6 extends OpMode {
                 break;
             case _285_Slide_To_Left:
                 if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(7,-90,0.35,-90);
+                    robot.driveTrain.CmdDrive(6,-90,0.35,-90);
                     currentStage = stage._290_Arm_Pickup_Tank3;
                 }
 
@@ -418,9 +418,8 @@ public class NetAuton6 extends OpMode {
                 break;
 
             case _310_Snuffle6:
-                if(robot.intake.BTargetFound || (runtime.milliseconds() >= 1000)){
-                    robot.driveTrain.CmdDrive(24,-180,0.35,-90);
-                    robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
+                if(robot.intake.BTargetFound || (runtime.milliseconds() >= 450)){
+                    runtime.reset();
                     currentStage = stage._315_Slide_To_Right;
 
                 }
@@ -431,14 +430,16 @@ public class NetAuton6 extends OpMode {
 
                 break;
             case _315_Slide_To_Right:
-                if (robot.driveTrain.getCmdComplete())     {
-                    robot.driveTrain.CmdDrive(2,90,0.35,-90);
+                if (runtime.milliseconds() >= 150){
+                    //robot.driveTrain.CmdDrive(1,90,0.35,-90);
+                    robot.arm.setCurrentMode(Arm.Mode.INTERMEDIATE);
+                    robot.driveTrain.CmdDrive(24,-180,0.35,-90);
                     currentStage = stage._320_Delivery3;
                 }
 
                 break;
             case _320_Delivery3:
-                if (robot.arm.getCmdComplete())     {
+                if (robot.driveTrain.getCmdComplete() && robot.arm.getCmdComplete())     {
                     //robot.driveTrain.CmdDrive(0,-180,0.35,-90);
                     robot.arm.setCurrentMode(Arm.Mode.DELIVER_TO_HIGH_BASKET);
                     currentStage = stage._330_Reverse3;

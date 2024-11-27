@@ -30,7 +30,7 @@ public class DriveTrain extends BaseHardware {
      * driver station on a regular, periodic basis.
      */
  //   public Telemetry telemetry = null;
-    
+
     /**
      * Hardware Mappings
      */
@@ -77,7 +77,7 @@ public class DriveTrain extends BaseHardware {
     private double sensorRangeLeftSide = 4000.0;
     private double sensorRangeRightSide = 4000.0;
     private double sensorRangeRear = 4000.0;
-    private final double sensorTol = 0.5;
+    private final double sensorTol = 0.25;
     private SensorSel sensorSelection = SensorSel.UNKNOWN;
 
     /**
@@ -174,12 +174,14 @@ public class DriveTrain extends BaseHardware {
      * This method will be called repeatedly in a loop while this op mode is running
      */
     public void loop() {
-        telemetry.addData("Gyro","Gyro "+Gyro.getGyroHeading());
-        telemetry.addData("LDM1 CP","LDM1 CP "+LDM1.getCurrentPosition());
-        telemetry.addData("LDM2 CP","LDM2 CP "+LDM2.getCurrentPosition());
+       // telemetry.addData("Gyro","Gyro "+Gyro.getGyroHeading());
+       // telemetry.addData("LDM1 CP","LDM1 CP "+LDM1.getCurrentPosition());
+       // telemetry.addData("LDM2 CP","LDM2 CP "+LDM2.getCurrentPosition());
 
-        telemetry.addData("RDM1 CP","RDM1 CP "+RDM1.getCurrentPosition());
-        telemetry.addData("RDM2 CP","RDM2 CP "+RDM2.getCurrentPosition());
+        //telemetry.addData("RDM1 CP","RDM1 CP "+RDM1.getCurrentPosition());
+       // telemetry.addData("RDM2 CP","RDM2 CP "+RDM2.getCurrentPosition());
+
+          telemetry.addData("Wallaway ",WallEway.getDistance(DistanceUnit.INCH));
 
         switch(Current_Mode){
             case TELEOP:
@@ -233,7 +235,8 @@ public class DriveTrain extends BaseHardware {
         Current_Mode = Mode.TELEOP;
         double Drive = Left_Y * Current_Speed;
         double Strafe = Left_X * Current_Speed;
-        double Turn = Right_X * (0.8- Drive) * TURNSPEED_TELEOP ;
+        //double Turn = Right_X * (0.8- Drive) * TURNSPEED_TELEOP ;
+        double Turn = Right_X * TURNSPEED_TELEOP;
         double Heading = Gyro.getGyroHeadingRadian();
         double NDrive = Strafe * Math.sin(Heading) + Drive * Math.cos(Heading);
         double NStrafe = Strafe * Math.cos(Heading) - Drive * Math.sin(Heading);
@@ -553,7 +556,7 @@ public class DriveTrain extends BaseHardware {
        // double distance = sensorRange;
         // update speed_aa ;
         //speed_AA = (CommonLogic.goToPosStag(GetSensorRange(sel), Drive_Target,sensorTol,SensorDrive,stagPos,stagPow));
-        speed_AA = (CommonLogic.PIDcalc(9, 0,GetSensorRange(sel),Drive_Target));
+        speed_AA = (CommonLogic.PIDcalc(8, 0,GetSensorRange(sel),Drive_Target));
         //telemetry.addData(TAGChassis,"sensor range " + sensorRange);
         //telemetry.addData(TAGChassis,"drive target " + Drive_Target);
         startDrive();

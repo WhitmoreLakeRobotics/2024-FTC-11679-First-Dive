@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Base class for FTC Team 8492 defined hardware
  */
-public class Tamatoa extends BaseHardware {
+public class TheCrabbyClaw extends BaseHardware {
 
     private ElapsedTime runtime = new ElapsedTime();
     /**
@@ -24,9 +24,16 @@ public class Tamatoa extends BaseHardware {
 
 
     private boolean cmdComplete = true;
-    private Mode CurrentMode = Mode.STOP;
+    private Mode CurrentMode = Mode.NOTGO;
 
     public Servo Tamatoa;
+
+    public final double NotGoPos = 0.5;
+    public final double ShinyPos = 0;
+    public final double DropPos = 1;
+
+    // now that i think about it do i need a stop position for this;
+    //positions for this not known yet;
 
 
 
@@ -82,9 +89,18 @@ public class Tamatoa extends BaseHardware {
      */
     public void loop(){
 
-        
+        switch(CurrentMode){
+            case NOTGO:
+                doNotGo();
 
+                break;
+            case DROP:
 
+                break;
+            case SHINY:
+
+            //make case for each option ( copied from "Intake");
+        }
 
 
 
@@ -92,9 +108,24 @@ public class Tamatoa extends BaseHardware {
 
     }
 
-    public void doStop(){
-        CurrentMode = Mode.STOP;
+     public void doShiny(){
+        CurrentMode = Mode.SHINY;
+        Tamatoa.setPosition(ShinyPos);
+        cmdComplete = true;
+    }
+    public void doDrop(){
+        CurrentMode = Mode.DROP;
+        Tamatoa.setPosition(DropPos);
+        cmdComplete = true;
+    }
 
+
+
+
+
+    public void doNotGo(){
+        CurrentMode = Mode.NOTGO;
+        Tamatoa.setPosition(NotGoPos);
         cmdComplete = true;
     }
 
@@ -114,7 +145,7 @@ public class Tamatoa extends BaseHardware {
     private enum Mode{
         SHINY,
         DROP,
-        STOP;
+        NOTGO;
     }
 
 
