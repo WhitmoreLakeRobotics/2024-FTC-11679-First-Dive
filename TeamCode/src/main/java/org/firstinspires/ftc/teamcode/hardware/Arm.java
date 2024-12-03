@@ -420,7 +420,7 @@ public class Arm extends BaseHardware {
     public enum Mode{
         START(0,100,0,0,100,0,5),
         PICKUP_TANK(0,120,0,560,100,0,1716),
-        PICKUP_GROUND(0,100,0,138,100,0,1716),
+        PICKUP_GROUND(0,100,-0.03,138,110,0,1716),
         PICKUP_WALL(15,100,0,0,100,0,5),
         DELIVER_TO_OBSERVATION(20,100,0,0,100,0,5),
         CLIMB2(1000,100,0,1457,100,0,1460),
@@ -431,7 +431,7 @@ public class Arm extends BaseHardware {
         CLIMB(1300,150,0,2500,100,0,3000),
        // CLIMB(1000,100,0,1457,100,0,1460),
         STOP(0,1000000000,0,0,10000000,0,5),
-        INTERMEDIATE(1500, 120, 0, 500, 120, 0, 1600),
+        INTERMEDIATE(1500, 120, 0, 500, 130, 0, 1600),
         TANK_ENTRY(400,150,0,560,100,0,1716),
         IDLE(0,0,0,0,0,0, 0);
 

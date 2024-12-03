@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.common.Settings;
 public class DriveTrain extends BaseHardware {
 
     public DistanceSensor WallEway;  //auton wall distance sensor;
+    public DistanceSensor HumptyDumpty;  // there is another;
 
     private DcMotor LDM1 ;
     private DcMotor LDM2 ;
@@ -39,7 +40,7 @@ public class DriveTrain extends BaseHardware {
 
     private boolean cmdComplete = true;
 
-    private static double TURNSPEED_TELEOP = 0.5;
+    private static double TURNSPEED_TELEOP = 0.60;
 
     private double LDM1Power;
     private double LDM2Power;
@@ -96,7 +97,7 @@ public class DriveTrain extends BaseHardware {
      * This method will be called once when the INIT button is pressed.
      */
     public void init() {
-
+        HumptyDumpty = hardwareMap.get(DistanceSensor.class,"HumptyDumpty");
         WallEway = hardwareMap.get(DistanceSensor.class, "WallEway");
 
 
@@ -181,7 +182,8 @@ public class DriveTrain extends BaseHardware {
         //telemetry.addData("RDM1 CP","RDM1 CP "+RDM1.getCurrentPosition());
        // telemetry.addData("RDM2 CP","RDM2 CP "+RDM2.getCurrentPosition());
 
-          telemetry.addData("Wallaway ",WallEway.getDistance(DistanceUnit.INCH));
+         // telemetry.addData("Wallaway ",WallEway.getDistance(DistanceUnit.INCH));
+          telemetry.addData("HumptyDumpty",HumptyDumpty.getDistance(DistanceUnit.INCH));
 
         switch(Current_Mode){
             case TELEOP:
@@ -211,6 +213,11 @@ public class DriveTrain extends BaseHardware {
 
 
     }
+
+    public DistanceSensor getHumptyDumpty() {
+        return HumptyDumpty;
+    }
+
 
     public DistanceSensor getWallEway() {
         return WallEway;
@@ -556,7 +563,7 @@ public class DriveTrain extends BaseHardware {
        // double distance = sensorRange;
         // update speed_aa ;
         //speed_AA = (CommonLogic.goToPosStag(GetSensorRange(sel), Drive_Target,sensorTol,SensorDrive,stagPos,stagPow));
-        speed_AA = (CommonLogic.PIDcalc(8, 0,GetSensorRange(sel),Drive_Target));
+        speed_AA = (CommonLogic.PIDcalc(6.5, 0,GetSensorRange(sel),Drive_Target));
         //telemetry.addData(TAGChassis,"sensor range " + sensorRange);
         //telemetry.addData(TAGChassis,"drive target " + Drive_Target);
         startDrive();
@@ -584,7 +591,9 @@ public class DriveTrain extends BaseHardware {
                 range = Math.min(sensorRangeRightFront,sensorRangeLeftFront); //(sensorRangeRightFront+ sensorRangeLeftFront)/2;
                 break;
             case RIGHT_FRONT:
-                range = sensorRangeRightFront;
+                //range = sensorRangeRightFront;
+                range = CommonLogic.CapValue(HumptyDumpty.getDistance(DistanceUnit.INCH),0,80);
+
                 break;
             case LEFT_FRONT:
                 range = sensorRangeLeftFront;
