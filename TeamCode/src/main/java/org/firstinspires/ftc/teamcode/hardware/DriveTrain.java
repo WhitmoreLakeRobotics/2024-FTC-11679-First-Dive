@@ -183,7 +183,7 @@ public class DriveTrain extends BaseHardware {
        // telemetry.addData("RDM2 CP","RDM2 CP "+RDM2.getCurrentPosition());
 
          // telemetry.addData("Wallaway ",WallEway.getDistance(DistanceUnit.INCH));
-          telemetry.addData("HumptyDumpty",HumptyDumpty.getDistance(DistanceUnit.INCH));
+         // telemetry.addData("HumptyDumpty",HumptyDumpty.getDistance(DistanceUnit.INCH));
 
         switch(Current_Mode){
             case TELEOP:

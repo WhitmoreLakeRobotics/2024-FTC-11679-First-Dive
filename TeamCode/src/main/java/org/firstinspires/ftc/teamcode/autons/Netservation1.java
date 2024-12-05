@@ -166,10 +166,10 @@ public class Netservation1 extends OpMode {
                     currentStage = stage._80_Drive_Right1;
                     // get from other code;
                 }
-
+                  break;
             case _80_Drive_Right1:
-                if(robot.arm.getCmdComplete()) {
-                    robot.driveTrain.CmdDrive(66, 90, 0.35, -90);
+                if(robot.driveTrain.getCmdComplete()) {
+                    robot.driveTrain.CmdDrive(78, 90, 0.35, -90);
                     currentStage = stage._31_Turn500;
                 }
                 break;
@@ -184,6 +184,7 @@ public class Netservation1 extends OpMode {
             case _40_Forward:
                 if (robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(46,0,0.35,0);
+                    robot.arm.setCurrentMode(Arm.Mode.START);
                     currentStage = stage._60_Drive_Right;}
                 break;
 
@@ -242,10 +243,10 @@ public class Netservation1 extends OpMode {
             case _120_Reverse:
                 if (robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(44,180,0.35,0);
-                    currentStage = stage._130_Forward;}
+                    currentStage = stage._180_End;}
                 break;
 
-
+           /*
             case _130_Forward:
                 if (robot.driveTrain.getCmdComplete()){
                     robot.driveTrain.CmdDrive(12,0,0.35,0);
@@ -258,7 +259,7 @@ public class Netservation1 extends OpMode {
                     robot.driveTrain.CmdDrive(132,-90,0.35,0);
                     currentStage = stage._180_End;}
 
-                break;
+                break;  */
             case _180_End:
                 if(runtime.milliseconds() >= 500){
                     robot.stop();
