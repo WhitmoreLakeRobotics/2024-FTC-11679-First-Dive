@@ -406,6 +406,7 @@ public class Arm extends BaseHardware {
     public void setCurrentMode(Mode Nmode){
         //update to recieve and set mode
     CurrentMode = Nmode;
+        cmdComplete = false;
     }
 
     public Mode getCurrentMode(){
